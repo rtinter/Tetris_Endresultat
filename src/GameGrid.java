@@ -108,8 +108,7 @@ public class GameGrid{
 
     //DisplayBlocks
     public void draw(PApplet a) {
-
-
+        
         //Färbe Block je nach value
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
