@@ -1,3 +1,4 @@
+
 import processing.core.PApplet;
 public class GameGrid{
 
@@ -9,12 +10,18 @@ public class GameGrid{
     int cellSize = 35;
 
 
+
+
+
     //Konstruktor
     public GameGrid(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
         this.grid = new int[rows][cols];
     }
+
+
+
 
     //Getter
     public int getRows() {
@@ -106,7 +113,29 @@ public class GameGrid{
     }
 
 
-    //DisplayBlocks
+    //DrawBlock
+    //j = rotation -> hier 0
+    //i = eins der elemente mit den koordinaten als inhalt
+    // 1. wert gibt die zeile an und der 2. die spalte
+    // startoffset 0 und eins sind die werte der startposition => Definiert im block
+   /* public void drawBlock(J_Block block, int[][][] blockPositions, int[] startOffset) {
+        for (int i = 0, j = 0; i < blockPositions[j].length; i++) {
+            int row = blockPositions[j][i][0] + startOffset[0];
+            int col = blockPositions[j][i][1] + startOffset[1];
+            gridPlayground.setPosition(row, col, block.getId());
+        }
+    }*/
+    public void drawBlock(int[][][] blockPositions, int[] startOffset, int blockId) {
+            for (int i = 0, j=0; i < blockPositions[j].length; i++) {
+                int row = blockPositions[j][i][0] + startOffset[0];
+                int col = blockPositions[j][i][1] + startOffset[1];
+                setPosition(row, col, blockId);
+            }
+
+    }
+
+
+    //DisplayBlockInColor
     public void draw(PApplet a) {
         
         //Färbe Block je nach value
@@ -116,13 +145,37 @@ public class GameGrid{
                 float x = col * cellSize;
                 float y = row * cellSize;
                 a.stroke(0);
-                if (value == 0) {
-                    a.fill(255);
-                } else {
-                    a.fill(237,12,12);
+
+                switch (value) {
+                    case 0:
+                        a.fill(255);
+                        break;
+                    case 1:
+                        a.fill(0,191,255); //Blau
+                        break;
+                    case 2:
+                        a.fill(255,127,36); //Orange
+                        break;
+                    case 3:
+                        a.fill(155,62,150); //Lila
+                        break;
+                    case 4:
+                        a.fill(0,205,205); //Hellblau
+                        break;
+                    case 5:
+                        a.fill(255,64,0); //Rot
+                        break;
+                    case 6:
+                        a.fill(255,215,0); //Gelb
+                        break;
+
+                    default:
+                        a.fill(0,255,127); // Grün
                 }
-                a.rect(x+40, y+40, cellSize, cellSize);
+                a.rect(x + 40, y + 40, cellSize, cellSize); //+40px Versatz
             }
+
+
         }
     }
 }
