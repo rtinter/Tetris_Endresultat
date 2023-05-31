@@ -1,4 +1,3 @@
-
 import processing.core.PApplet;
 public class GameGrid{
 
@@ -8,7 +7,6 @@ public class GameGrid{
     private int rows;
     private int cols;
     int cellSize = 35;
-
 
 
 

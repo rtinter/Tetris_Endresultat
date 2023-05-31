@@ -53,9 +53,11 @@ public class Main extends PApplet{
         Block randomBlock = blocks.get(randomIndex);
 
         //Block malen
+
         gridPlayground.drawBlock(randomBlock.getTiles(), randomBlock.getStartOffset(), randomBlock.getId() );
 
     }
+
 
     @Override
     public void draw() {
@@ -63,6 +65,8 @@ public class Main extends PApplet{
         gridPlayground.draw(this);
         translate(380,0);
         gridNextStone.draw(this);
+
+
 
 
     }
