@@ -17,7 +17,7 @@
         }
 
         protected int[] getStartOffset() {
-            return new int[] { 4, 3 };
+            return new int[] { 0, 0 };
         }
 
         public int[][][] getTiles() {

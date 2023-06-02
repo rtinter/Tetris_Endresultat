@@ -15,7 +15,10 @@ public abstract class Block {
         return tiles;
     }
 
-
+    public void moveDown() {
+        int[] startOffset = getStartOffset();
+        startOffset[0]++; // Erhöhen Sie den Startoffset für die Y-Koordinate, um den Block nach unten zu bewegen
+    }
 
 
 }
