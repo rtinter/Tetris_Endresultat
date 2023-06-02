@@ -17,8 +17,12 @@ public class L_Block extends Block{
         return 7;
     }
 
-    protected int[] getStartOffset() {
-        return new int[] { 0, 0 };
+    public int[] startCoords() {
+        return new int[] { 0, 4 };
+    }
+
+    public void setCoordinates(int[] newCoordinates) {
+        currentPosition = newCoordinates;
     }
 
     public int[][][] getTiles() {

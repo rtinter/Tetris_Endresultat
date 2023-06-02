@@ -18,8 +18,12 @@ public class Z_Block extends Block{
         return 5;
     }
 
-    protected int[] getStartOffset() {
-        return new int[] { 4, 3 };
+    public int[] startCoords() {
+        return new int[] { 0, 5 };
+    }
+
+    public void setCoordinates(int[] newCoordinates) {
+        currentPosition = newCoordinates;
     }
 
     public int[][][] getTiles() {

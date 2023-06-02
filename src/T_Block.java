@@ -18,8 +18,12 @@ public class T_Block extends Block {
         return 3;
     }
 
-    protected int[] getStartOffset() {
-        return new int[] { 0, 0 };
+    public int[] startCoords() {
+        return new int[] { 0, 5  };
+    }
+
+    public void setCoordinates(int[] newCoordinates) {
+        currentPosition = newCoordinates;
     }
 
     public int[][][] getTiles() {

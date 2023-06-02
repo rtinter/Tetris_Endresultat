@@ -111,24 +111,19 @@ public class GameGrid{
     }
 
 
-    //DrawBlock
-    //j = rotation -> hier 0
-    //i = eins der elemente mit den koordinaten als inhalt
-    // 1. wert gibt die zeile an und der 2. die spalte
-    // startoffset 0 und eins sind die werte der startposition => Definiert im block
-   /* public void drawBlock(J_Block block, int[][][] blockPositions, int[] startOffset) {
-        for (int i = 0, j = 0; i < blockPositions[j].length; i++) {
-            int row = blockPositions[j][i][0] + startOffset[0];
-            int col = blockPositions[j][i][1] + startOffset[1];
-            gridPlayground.setPosition(row, col, block.getId());
-        }
-    }*/
     public void drawBlock(int[][][] blockPositions, int[] startOffset, int blockId) {
             for (int i = 0, j=0; i < blockPositions[j].length; i++) {
                 int row = blockPositions[j][i][0] + startOffset[0];
                 int col = blockPositions[j][i][1] + startOffset[1];
-                setPosition(row, col, blockId);
+                setPosition(row, col, 0);
             }
+
+        for (int i = 0, j=0; i < blockPositions[j].length; i++) {
+            int row = blockPositions[j][i][0] + startOffset[0];
+            int col = blockPositions[j][i][1] + startOffset[1];
+            setPosition(row, col, blockId);
+        }
+
 
     }
 

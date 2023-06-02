@@ -1,11 +1,5 @@
 import processing.core.PApplet;
 import java.util.ArrayList;
-import java.util.Random;
-
-
-import processing.core.PApplet;
-import java.util.ArrayList;
-import java.util.Random;
 
 public class Main extends PApplet {
 
@@ -13,10 +7,13 @@ public class Main extends PApplet {
         PApplet.main(Main.class);
     }
 
+    public static final int speed = 50;
+
+
     GameGrid gridPlayground = new GameGrid(20, 10);
     GameGrid gridNextStone = new GameGrid(4, 4);
 
-    ArrayList<Block> blocks = new ArrayList<>();
+    BlockFactory blockFactory = new BlockFactory();
 
     Block currentBlock;
 
@@ -24,23 +21,17 @@ public class Main extends PApplet {
     public void settings() {
         size(600, 780);
 
-        blocks.add(new I_Block());
-        blocks.add(new L_Block());
-        blocks.add(new O_Block());
-        blocks.add(new S_Block());
-        blocks.add(new J_Block());
-        blocks.add(new T_Block());
-        blocks.add(new Z_Block());
+        currentBlock = blockFactory.getNextBlock();
 
-        // Zufälliges Objekt auswählen
-        int randomIndex = (int) (Math.random() * blocks.size());
-        currentBlock = blocks.get(randomIndex);
+
+        // Alle Zellen mit 0 füllen
+        gridPlayground.setupGrid(gridPlayground);
 
         // Block im gridNextStone zeichnen
-        gridNextStone.drawBlock(currentBlock.getTiles(), currentBlock.getStartOffset(), currentBlock.getId());
+       //gridNextStone.drawBlock(currentBlock.getTiles(), currentBlock.startCoords(), currentBlock.getId());
 
         // Block im gridNextStone zeichnen
-        gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.getStartOffset(), currentBlock.getId());
+        gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.startCoords(), currentBlock.getId());
 
     }
 
@@ -54,5 +45,15 @@ public class Main extends PApplet {
         // gridNextStone zeichnen
         translate(380, 0);
         gridNextStone.draw(this);
+
+
+        gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.getId());
+
+        if (frameCount % speed == 0) {
+            currentBlock.moveDown(gridPlayground);
+        }
+
+
     }
+
 }

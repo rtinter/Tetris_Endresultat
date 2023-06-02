@@ -1,6 +1,7 @@
  public class I_Block extends Block{
 
         private final int[][][] tiles = createTiles();
+        public int[] currentPosition;
 
 
      protected int[][][] createTiles() {
@@ -16,9 +17,13 @@
             return 1;
         }
 
-        protected int[] getStartOffset() {
-            return new int[] { 0, 0 };
+        public int[] startCoords() {
+            return new int[] { -1, 3 };
         }
+
+     public void setCoordinates(int[] newCoordinates) {
+         currentPosition = newCoordinates;
+     }
 
         public int[][][] getTiles() {
             return tiles;

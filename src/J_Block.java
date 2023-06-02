@@ -1,7 +1,6 @@
-public class J_Block extends Block{
+public class J_Block extends Block {
 
     private final int[][][] tiles = createTiles();
-
 
     protected int[][][] createTiles() {
         int[][][] tiles = new int[4][4][2]; // 1. Dimension = Rotationstate, 2. Dimension = Position der Tiles im Objekt, 3. Dimension = x- und y-Koordinaten
@@ -12,18 +11,19 @@ public class J_Block extends Block{
         return tiles;
     }
 
-
     public int getId() {
         return 5;
     }
 
-    protected int[] getStartOffset() {
-        return new int[] { 0, 0 };
+    public int[] startCoords() {
+        return new int[] { 0, 4 };
+    }
+
+    public void setCoordinates(int[] newCoordinates) {
+        currentPosition = newCoordinates;
     }
 
     public int[][][] getTiles() {
         return tiles;
     }
-
-
 }

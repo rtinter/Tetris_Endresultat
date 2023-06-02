@@ -1,24 +1,57 @@
 public abstract class Block {
     protected int[][][] tiles;
+    protected int[] currentPosition;
 
     public Block() {
         tiles = createTiles();
+        currentPosition = startCoords();
     }
 
     protected abstract int[][][] createTiles();
 
     public abstract int getId();
 
-    protected abstract int[] getStartOffset();
+    protected abstract int[] startCoords();
 
     public int[][][] getTiles() {
         return tiles;
     }
 
-    public void moveDown() {
-        int[] startOffset = getStartOffset();
-        startOffset[0]++; // Erhöhen Sie den Startoffset für die Y-Koordinate, um den Block nach unten zu bewegen
+    public int[] getCurrentPosition() {
+        return currentPosition;
+    }
+
+    public void setCoordinates(int[] newCoordinates) {
+        currentPosition = newCoordinates;
+    }
+
+    public void moveDown(GameGrid gameGrid) {
+        int[][][] tiles = getTiles();
+        int[] currentPosition = getCurrentPosition();
+
+        boolean canMove = true;
+        for (int i = 0; i < tiles[0].length; i++) {
+            int row = tiles[0][i][0] + currentPosition[0] + 1;
+            int col = tiles[0][i][1] + currentPosition[1];
+            if (row >= gameGrid.getRows() || col >= gameGrid.getCols()) {
+                canMove = false;
+                break;
+            }
+        }
+
+        if (canMove) {
+            currentPosition[0]++;
+        }
     }
 
 
+
+
+    public void moveLeft() {
+        currentPosition[1]--; // Verringere die x-Koordinate der aktuellen Position, um den Block nach links zu bewegen
+    }
+
+    public void moveRight() {
+        currentPosition[1]++; // Erhöhe die x-Koordinate der aktuellen Position, um den Block nach rechts zu bewegen
+    }
 }

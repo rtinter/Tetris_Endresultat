@@ -36,7 +36,7 @@ public class GameState extends GameGrid {
 
         if (currentBlock != null) {
             int[][][] blockPositions = currentBlock.getTiles();
-            int[] startOffset = currentBlock.getStartOffset();
+            int[] startOffset = currentBlock.startCoords();
             int blockId = currentBlock.getId();
 
             drawBlock(blockPositions, startOffset, blockId);
