@@ -112,12 +112,6 @@ public class GameGrid{
 
 
     public void drawBlock(int[][][] blockPositions, int[] startOffset, int blockId) {
-            for (int i = 0, j=0; i < blockPositions[j].length; i++) {
-                int row = blockPositions[j][i][0] + startOffset[0];
-                int col = blockPositions[j][i][1] + startOffset[1];
-                setPosition(row, col, 0);
-            }
-
         for (int i = 0, j=0; i < blockPositions[j].length; i++) {
             int row = blockPositions[j][i][0] + startOffset[0];
             int col = blockPositions[j][i][1] + startOffset[1];
