@@ -50,7 +50,15 @@ public class Main extends PApplet {
         gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.getId());
 
         if (frameCount % speed == 0) {
+
+            // Löscht den aktuellen Block bevor er sich bewegt
+            gridPlayground.deleteBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition());
+
+            // Bewegt den Block
             currentBlock.moveDown(gridPlayground);
+
+            // Zeichnet den Block nach dem Bewegen
+            gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.getId());
         }
 
 
