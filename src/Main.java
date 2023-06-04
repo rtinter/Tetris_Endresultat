@@ -50,7 +50,7 @@ public class Main extends PApplet {
         //Block im gridNextStone zeichnen
         gridNextStone.drawBlock(nextBlockInQueue.getTiles(), nextBlockInQueue.startCoordsForNextBlock(), nextBlockInQueue.getId(), nextBlockInQueue.currentRotation);
 
-        gameState = new GameState(this);
+        gameState = new GameState(this, gridPlayground.getRows(), gridPlayground.getCols());
 
         gameState.startScreen();
     }
@@ -95,13 +95,16 @@ public class Main extends PApplet {
                 // Löscht den aktuellen Block bevor er sich bewegt
                 gridPlayground.deleteBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.currentRotation);
 
+
                 // Bewegt den Block nach unten
                 boolean movedDown = currentBlock.moveDown(gridPlayground);
+
 
                 // Überprüft, ob der Block erfolgreich nach unten bewegt wurde
                 if (!movedDown) {
                     // Block konnte nicht nach unten bewegt werden, daher wird er eingefroren
                     currentBlock.freeze(gridPlayground);
+
 
                     int points = kollision.clearFullRows(gridPlayground); // Punkte zuweisen
                     score += points; // Punkte erhöhen
@@ -131,6 +134,7 @@ public class Main extends PApplet {
             textSize(24);
             text("Time: " + elapsedSeconds, 480, 350); //x-Koordinate verändert, da sie nach Spielstart verschoben wurde
         }
+
         // Bei Pausierung: "PAUSE"
         else if (gameState.getState() == GameState.State.PAUSED) {
             //background(255);
@@ -139,8 +143,9 @@ public class Main extends PApplet {
             textAlign(CENTER, CENTER);
             text("PAUSE", width / 2, height / 2);
         }
-    }
 
+
+    }
 
     public void keyPressed() {
         switch (keyCode) {

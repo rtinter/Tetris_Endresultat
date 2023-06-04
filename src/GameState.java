@@ -1,4 +1,4 @@
-public class GameState {
+public class GameState extends Kollision{
 
     public enum State {
         START,
@@ -12,12 +12,16 @@ public class GameState {
     private int score;
     private int elapsedTime;
 
-    public GameState(Main main) {
+
+
+    public GameState(Main main, int rows, int cols) {
+        super(rows+1, cols);
         this.main = main;
         this.state = State.RUNNING;
         this.score = 0;
         this.elapsedTime = 0;
     }
+
 
     public void startScreen() {
         this.state = State.START;
@@ -42,24 +46,8 @@ public class GameState {
         }
     }
 
-    public boolean checkGameOver() {
-        // Check if a freshly spawned block collides right away
-        // You would need to implement the collision check logic here
-        return false;
-    }
 
-    public void update() {
-        if(this.state == State.RUNNING) {
-            if (checkGameOver()) {
-                this.state = State.GAME_OVER;
-            }
-            else {
-                main.draw();
-                this.score = main.getScore();
-                this.elapsedTime = main.getElapsedTime();
-            }
-        }
-    }
+
 
     public State getState() {
         return this.state;

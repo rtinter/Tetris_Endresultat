@@ -4,8 +4,9 @@ public class GameGrid{
 
     //Attribute
     int[][] grid;
-    private int rows;
-    private int cols;
+
+    protected int rows;
+    protected int cols;
     int cellSize = 35;
 
     //Konstruktor
