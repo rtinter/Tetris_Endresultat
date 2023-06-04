@@ -121,12 +121,12 @@ public class Main extends PApplet {
         // Zeigt den Punktestand
         fill(0);
         textSize(24);
-        text("Score: " + score, 480, 300); //x-Koordinate verändert, da sie nach Spielstart verschoben wurde
+        text("Score: " + score, 480, 300); //x-Koordinate wurde verändert, da sie nach Spielstart verschoben wurde
 
         //Zeigt die vergangene Zeit
         fill(0);
         textSize(24);
-        text("Time: " + elapsedSeconds, 480, 350); //x-Koordinate verändert, da sie nach Spielstart verschoben wurde
+        text("Time: " + elapsedSeconds, 480, 350); //x-Koordinate wurde verändert, da sie nach Spielstart verschoben wurde
       }
         // Bei Pausierung: "PAUSE"
         else if(gameState.getState() == GameState.State.PAUSED) {
