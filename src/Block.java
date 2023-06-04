@@ -78,7 +78,6 @@ public abstract class Block {
 
 
 
-
     private boolean canBlockFit(int[][][] tiles, int[] position, GameGrid gameGrid) {
         for (int i = 0; i < tiles[currentRotation].length; i++) {
             int row = tiles[currentRotation][i][0] + position[0];

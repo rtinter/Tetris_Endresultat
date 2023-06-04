@@ -79,5 +79,29 @@ public class Main extends PApplet {
 
       }
 
+    public void keyPressed() {
+        switch(keyCode) {
+            case LEFT: // Bewegt den Block nach links, wenn die linke Pfeiltaste gedrückt wird
+                gridPlayground.deleteBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition());
+                currentBlock.moveLeft(gridPlayground);
+                gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.getId());
+                break;
+            case RIGHT: // Bewegt den Block nach rechts, wenn die rechte Pfeiltaste gedrückt wird
+                gridPlayground.deleteBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition());
+                currentBlock.moveRight(gridPlayground);
+                gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.getId());
+                break;
+            case DOWN: // Bewegt den Block nach unten, wenn die untere Pfeiltaste gedrückt wird
+                gridPlayground.deleteBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition());
+                currentBlock.moveDown(gridPlayground);
+                gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.getId());
+                break;
+            default:
+                break;
+        }
+    }
+
+
+
 }
 
