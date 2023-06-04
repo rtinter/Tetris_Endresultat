@@ -83,7 +83,8 @@ public abstract class Block {
             int row = tiles[currentRotation][i][0] + position[0];
             int col = tiles[currentRotation][i][1] + position[1];
 
-            if (row >= gameGrid.getRows() || col >= gameGrid.getCols() || !gameGrid.IsEmpty(row, col)) {
+            // Kollisionserkennung mit den Seiten des Spielfelds
+            if (row < 0 || col < 0 || row >= gameGrid.getRows() || col >= gameGrid.getCols() || !gameGrid.IsEmpty(row, col)) {
                 return false;
             }
         }
