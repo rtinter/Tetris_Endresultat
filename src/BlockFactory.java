@@ -1,9 +1,11 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class BlockFactory {
-    private ArrayList<Block> blocks;
+    private List<Block> blocks;
     private Random random;
+    private Block currentBlock;
     private Block nextBlock;
 
     public BlockFactory() {
@@ -15,23 +17,32 @@ public class BlockFactory {
         blocks.add(new S_Block());
         blocks.add(new T_Block());
         blocks.add(new Z_Block());
+        blocks.add(new I_Block());
+        blocks.add(new J_Block());
+        blocks.add(new L_Block());
+        blocks.add(new O_Block());
+        blocks.add(new S_Block());
+        blocks.add(new T_Block());
+        blocks.add(new Z_Block());
 
         random = new Random();
-        nextBlock = randomBlock();
+        currentBlock = getRandomBlock();
+        nextBlock = getRandomBlock();
     }
+
+public Block blockQueue() {
+            return nextBlock;
+        }
+
 
     public Block getNextBlock() {
         Block block = nextBlock;
-
-        do {
-            nextBlock = randomBlock();
-        } while (block.getId() == nextBlock.getId());
-
+        nextBlock = getRandomBlock();
         return block;
     }
 
-    private Block randomBlock() {
-        int randomIndex = random.nextInt(blocks.size());
-        return blocks.get(randomIndex);
+    private Block getRandomBlock() {
+        return blocks.get(random.nextInt(blocks.size()));
     }
 }
+

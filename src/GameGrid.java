@@ -11,14 +11,14 @@ public class GameGrid{
 
 
 
+
+
     //Konstruktor
     public GameGrid(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
         this.grid = new int[rows][cols];
     }
-
-
 
 
     //Getter
@@ -96,44 +96,63 @@ public class GameGrid{
 
     // Durchläuft das Array und checkt ob Reihe voll ist, sonst ob generell eine Reihe voll war
     // gibt an wieviele Reihen voll sind und füllt sie mit moveRowDown wieder auf
-    public int clearFullRows(){
-        int cleared = 0;
-        for(int i = rows-1; i >=0; i--){
-            if(isRowFull(i)){
+    // gibt die erhalten Punkte je nach reihenanzahl zurück
+
+    public int clearFullRows() {
+        int clearedRows = 0;
+        int points = 0;
+
+        for (int i = rows - 1; i >= 0; i--) {
+            if (isRowFull(i)) {
                 clearRow(i);
-                cleared++;
-            }
-            else if(cleared > 0){
-                moveRowDown(i,cleared);
+                clearedRows++;
+            } else if (clearedRows > 0) {
+                moveRowDown(i, clearedRows);
             }
         }
-        return cleared;
+
+        switch (clearedRows) {
+            case 1:
+                points = 40;
+                break;
+            case 2:
+                points = 100;
+                break;
+            case 3:
+                points = 300;
+                break;
+            case 4:
+                points = 1200;
+                break;
+            default:
+                break;
+        }
+
+        return points;
     }
 
 
-    public void drawBlock(int[][][] blockPositions, int[] startOffset, int blockId) {
-            for (int i = 0, j=0; i < blockPositions[j].length; i++) {
-                int row = blockPositions[j][i][0] + startOffset[0];
-                int col = blockPositions[j][i][1] + startOffset[1];
-                setPosition(row, col, 0);
-            }
 
-        for (int i = 0, j=0; i < blockPositions[j].length; i++) {
+
+    public void drawBlock(int[][][] blockPositions, int[] startOffset, int blockId, int currentRotation) {
+        for (int i = 0, j= currentRotation; i < blockPositions[j].length; i++) {
             int row = blockPositions[j][i][0] + startOffset[0];
             int col = blockPositions[j][i][1] + startOffset[1];
             setPosition(row, col, blockId);
         }
-
-
     }
 
-    public void deleteBlock(int[][][] blockPositions, int[] startOffset) {
-        for (int i = 0, j=0; i < blockPositions[j].length; i++) {
+
+    public void deleteBlock(int[][][] blockPositions, int[] startOffset,  int currentRotation) {
+        for (int i = 0, j=currentRotation; i < blockPositions[j].length; i++) {
             int row = blockPositions[j][i][0] + startOffset[0];
             int col = blockPositions[j][i][1] + startOffset[1];
             setPosition(row, col, 0);
         }
     }
+
+
+
 
 
     //DisplayBlockInColor
@@ -152,26 +171,26 @@ public class GameGrid{
                         a.fill(255);
                         break;
                     case 1:
-                        a.fill(0,191,255); //Blau
+                        a.fill(0, 191, 255); //Blau
                         break;
                     case 2:
-                        a.fill(255,127,36); //Orange
+                        a.fill(255, 127, 36); //Orange
                         break;
                     case 3:
-                        a.fill(155,62,150); //Lila
+                        a.fill(155, 62, 150); //Lila
                         break;
                     case 4:
-                        a.fill(0,205,205); //Hellblau
+                        a.fill(0, 205, 205); //Hellblau
                         break;
                     case 5:
-                        a.fill(255,64,0); //Rot
+                        a.fill(255, 64, 0); //Rot
                         break;
                     case 6:
-                        a.fill(255,215,0); //Gelb
+                        a.fill(255, 215, 0); //Gelb
                         break;
 
                     default:
-                        a.fill(0,255,127); // Grün
+                        a.fill(0, 255, 127); // Grün
                 }
                 a.rect(x + 40, y + 40, cellSize, cellSize); //+40px Versatz
             }

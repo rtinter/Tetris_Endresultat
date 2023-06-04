@@ -9,6 +9,11 @@ public class O_Block extends Block{
         return tiles;
     }
 
+    @Override
+    public boolean rotate(GameGrid gameGrid) {
+        // O_Blöcke dürfen nicht rotieren, daher wird immer "false" zurückgegeben
+        return false;
+    }
 
     public int getId() {
         return 6;
