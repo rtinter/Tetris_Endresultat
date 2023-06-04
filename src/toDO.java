@@ -8,8 +8,10 @@ public class toDO {
     -> wenn in draw, dann terror
         -> klasse  => gameState
 
-  - Blöcke nach unten bewegen lassen
-    - ist da ne 0? sonst wird sich nich bewegt
+  - Blöcke nach unten bewegen lassen                              ==> check!
+    - ist da ne 0? sonst wird sich nich bewegt                    ==> check!
+
+
 
   - input handler um den block zu steuern.
 

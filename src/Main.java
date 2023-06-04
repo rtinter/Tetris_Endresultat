@@ -7,13 +7,14 @@ public class Main extends PApplet {
         PApplet.main(Main.class);
     }
 
-    public static final int speed = 50;
+    public static final int speed = 2;
+    boolean isRunning = true;
+    BlockFactory blockFactory = new BlockFactory();
 
 
     GameGrid gridPlayground = new GameGrid(20, 10);
     GameGrid gridNextStone = new GameGrid(4, 4);
 
-    BlockFactory blockFactory = new BlockFactory();
 
     Block currentBlock;
 
@@ -21,8 +22,8 @@ public class Main extends PApplet {
     public void settings() {
         size(600, 780);
 
-        currentBlock = blockFactory.getNextBlock();
 
+        currentBlock = blockFactory.getNextBlock();
 
         // Alle Zellen mit 0 füllen
         gridPlayground.setupGrid(gridPlayground);
@@ -39,6 +40,10 @@ public class Main extends PApplet {
     public void draw() {
         background(255);
 
+        BlockFactory blockFactory = new BlockFactory();
+
+
+
         // gridPlayground zeichnen
         gridPlayground.draw(this);
 
@@ -46,22 +51,29 @@ public class Main extends PApplet {
         translate(380, 0);
         gridNextStone.draw(this);
 
-
-        gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.getId());
-
         if (frameCount % speed == 0) {
+
 
             // Löscht den aktuellen Block bevor er sich bewegt
             gridPlayground.deleteBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition());
 
             // Bewegt den Block down
-            currentBlock.moveDown(gridPlayground);
+            boolean movedDown = currentBlock.moveDown(gridPlayground);
+
+            // Überprüft, ob der Block erfolgreich nach unten bewegt wurde
+            if (!movedDown) {
+                // Block konnte nicht nach unten bewegt werden, daher wird er eingefroren
+                currentBlock.freeze(gridPlayground);
+
+                // Erzeugt einen neuen Block
+                currentBlock = blockFactory.getNextBlock();
+                System.out.println(" block: " + currentBlock.getId());
+            }
 
             // Zeichnet den Block nach dem Bewegen
             gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.getId());
-        }
 
+      }
 
     }
-
 }
