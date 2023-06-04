@@ -28,6 +28,7 @@ public class GameGrid{
     //________________________________________________________________________
 
 
+
     //Gibt den Wert des jeweiligen Punkts auf dem Array zurück
     public int getPosition(int row, int col) {
         return grid[row][col];
