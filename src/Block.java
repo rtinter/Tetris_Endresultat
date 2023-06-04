@@ -88,6 +88,7 @@ public abstract class Block {
 
         int[] newPosition = currentPosition.clone();
 
+
         if (canBlockFit(newTiles, newPosition, gameGrid)) {
             setTiles(newTiles); // Aktualisiere die tiles-Eigenschaft
             currentRotation = nextRotation;
