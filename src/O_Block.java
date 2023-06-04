@@ -15,7 +15,6 @@ public class O_Block extends Block{
         return false;
     }
 
-
     public int getId() {
         return 6;
     }

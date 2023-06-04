@@ -5,6 +5,7 @@ import java.util.Random;
 public class BlockFactory {
     private List<Block> blocks;
     private Random random;
+    private Block currentBlock;
     private Block nextBlock;
 
     public BlockFactory() {
@@ -24,24 +25,24 @@ public class BlockFactory {
         blocks.add(new T_Block());
         blocks.add(new Z_Block());
 
-
         random = new Random();
-        nextBlock = randomBlock();
+        currentBlock = getRandomBlock();
+        nextBlock = getRandomBlock();
     }
+
+public Block blockQueue() {
+            return nextBlock;
+        }
+
 
     public Block getNextBlock() {
         Block block = nextBlock;
-        nextBlock = randomBlock();
-
+        nextBlock = getRandomBlock();
         return block;
     }
 
-    private Block randomBlock() {
-        Block randomBlock;
-        do {
-            randomBlock = blocks.get(random.nextInt(blocks.size()));
-        } while (randomBlock == nextBlock);
-
-        return randomBlock;
+    private Block getRandomBlock() {
+        return blocks.get(random.nextInt(blocks.size()));
     }
 }
+

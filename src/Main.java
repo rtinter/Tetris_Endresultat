@@ -10,6 +10,8 @@ public class Main extends PApplet {
     public static final int speed = 50;
 
     BlockFactory blockFactory = new BlockFactory();
+    Block nextBlockInQueue = blockFactory.blockQueue();
+
 
     GameGrid gridPlayground = new GameGrid(20, 10);
     GameGrid gridNextStone = new GameGrid(4, 4);
@@ -31,15 +33,15 @@ public class Main extends PApplet {
         timerStart = millis();
 
         currentBlock = blockFactory.getNextBlock();
+        nextBlockInQueue = blockFactory.blockQueue();
+
 
         // Alle Zellen mit 0 füllen
         gridPlayground.setupGrid(gridPlayground);
 
         //Block im gridNextStone zeichnen
-       //gridNextStone.drawBlock(currentBlock.getTiles(), currentBlock.startCoords(), currentBlock.getId());
+        gridNextStone.drawBlock(nextBlockInQueue.getTiles(), nextBlockInQueue.startCoordsForNextBlock(), nextBlockInQueue.getId(), nextBlockInQueue.currentRotation);
 
-        // Block im gridNextStone zeichnen
-        gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.startCoords(), currentBlock.getId(), currentBlock.currentRotation);
 
     }
 
@@ -54,7 +56,6 @@ public class Main extends PApplet {
         BlockFactory blockFactory = new BlockFactory();
 
 
-
         // gridPlayground zeichnen
         gridPlayground.draw(this);
 
@@ -65,30 +66,34 @@ public class Main extends PApplet {
 
         if (frameCount % speed == 0) {
 
-
             // Löscht den aktuellen Block bevor er sich bewegt
             gridPlayground.deleteBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.currentRotation);
 
-            // Bewegt den Block down
+            // Bewegt den Block nach unten
             boolean movedDown = currentBlock.moveDown(gridPlayground);
 
             // Überprüft, ob der Block erfolgreich nach unten bewegt wurde
             if (!movedDown) {
                 // Block konnte nicht nach unten bewegt werden, daher wird er eingefroren
                 currentBlock.freeze(gridPlayground);
-                int points = gridPlayground.clearFullRows(); // punkte zuweisen
-                gridPlayground.clearFullRows(); // Reihen löschen
 
+                int points = gridPlayground.clearFullRows(); // Punkte zuweisen
                 score += points; // Punkte erhöhen
 
-                // Erzeugt einen neuen Block
-                currentBlock = blockFactory.getNextBlock();
-            }
+                gridNextStone.setupGrid(gridNextStone);
 
+                // Erzeugt einen neuen Block
+                currentBlock = nextBlockInQueue;
+
+                // Den darauffolgenden im nextblockfeld anzeigen lassen
+                nextBlockInQueue = blockFactory.getNextBlock();
+                gridNextStone.drawBlock(nextBlockInQueue.getTiles(), nextBlockInQueue.startCoordsForNextBlock(), nextBlockInQueue.getId(), nextBlockInQueue.currentRotation);
+            }
         }
+
+
             // Zeichnet den Block nach jedem Tick neu
         gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.getId(), currentBlock.currentRotation);
-
 
         // Zeigt den Punktestand
         fill(0);

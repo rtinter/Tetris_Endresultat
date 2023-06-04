@@ -5,7 +5,10 @@ public abstract class Block {
     protected int[][][] tiles;
     protected int[] currentPosition;
 
+
+
     public int currentRotation = 0;
+
 
     public Block() {
         tiles = createTiles();
@@ -35,6 +38,15 @@ public abstract class Block {
     public void setCoordinates(int[] newCoordinates) {
         currentPosition = newCoordinates;
     }
+
+
+    // Startkoordinaten für das nextBlockArray
+    // Wichtig, da x der startpositionen für das spielfeld zu groß
+    protected int[] startCoordsForNextBlock() {
+        int[] coords = {1, 0};
+        return coords;
+    }
+
 
 
     public boolean moveDown(GameGrid gameGrid) {
