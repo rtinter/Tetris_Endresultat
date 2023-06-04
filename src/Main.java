@@ -23,6 +23,8 @@ public class Main extends PApplet {
     int timerStart;
     int elapsedSeconds;
 
+    GameState gameState;
+
 
 
 
@@ -42,11 +44,27 @@ public class Main extends PApplet {
         //Block im gridNextStone zeichnen
         gridNextStone.drawBlock(nextBlockInQueue.getTiles(), nextBlockInQueue.startCoordsForNextBlock(), nextBlockInQueue.getId(), nextBlockInQueue.currentRotation);
 
+        gameState = new GameState(this);
 
+        gameState.startScreen();
     }
 
     @Override
     public void draw() {
+
+        if(gameState.getState() == GameState.State.START) {
+            background(255);
+            textSize(60);
+            fill(0);
+            textAlign(CENTER, CENTER);
+            text("TETRIS", width/2, height/2 - 40);
+            textSize(24);
+            text("Press 'Enter' to begin", width/2, height/2 + 20);
+        }
+
+        //
+        if(gameState.getState() == GameState.State.RUNNING) {
+
 
         // Update elapsedSeconds by subtracting the timer start time from the current time and dividing by 1000 to get seconds.
         elapsedSeconds = (millis() - timerStart) / 1000;
@@ -60,8 +78,10 @@ public class Main extends PApplet {
         gridPlayground.draw(this);
 
         // gridNextStone zeichnen
+            pushMatrix(); //Speichern des aktuellen Matrix-Zustands (sonst verschiebt sich die Score/Timer Anzeige)
         translate(380, 0);
         gridNextStone.draw(this);
+            popMatrix(); //Wiederherstellen des letzen Matrix-Zustands (sonst verschiebt sich die Score/Timer Anzeige)
 
 
         if (frameCount % speed == 0) {
@@ -92,19 +112,28 @@ public class Main extends PApplet {
         }
 
 
-            // Zeichnet den Block nach jedem Tick neu
+        // Zeichnet den Block nach jedem Tick neu
         gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.getId(), currentBlock.currentRotation);
 
         // Zeigt den Punktestand
         fill(0);
         textSize(24);
-        text("Score: " + score, 40, 300);
+        text("Score: " + score, 480, 300); //x-Koordinate verändert, da sie nach Spielstart verschoben wurde
 
         //Zeigt die vergangene Zeit
         fill(0);
         textSize(24);
-        text("Time: " + elapsedSeconds, 40, 350);
+        text("Time: " + elapsedSeconds, 480, 350); //x-Koordinate verändert, da sie nach Spielstart verschoben wurde
       }
+        // Bei Pausierung: "PAUSE"
+        else if(gameState.getState() == GameState.State.PAUSED) {
+            //background(255);
+            textSize(60);
+            fill(255,0,0);
+            textAlign(CENTER, CENTER);
+            text("PAUSE", width/2, height/2);
+        }
+    }
 
 
     public void keyPressed() {
@@ -136,7 +165,37 @@ public class Main extends PApplet {
             default:
                 break;
         }
+
+        // Tasteneingabe um das Spiel zu starten
+        if(key == ENTER) {
+            if(gameState.getState() == GameState.State.START) {
+                gameState.startGame(); // Spiel starten, wenn es gestartet wird
+            }
+        }
+
+        //Tasteneingabe zum pausieren des Spiels
+        if(key == ' ') { // Wenn die Leertaste gedrückt wird
+            if(gameState.getState() == GameState.State.RUNNING) {
+                gameState.pauseGame(); // Spiel pausieren, wenn es läuft
+            } else if(gameState.getState() == GameState.State.PAUSED) {
+                gameState.resumeGame(); // Spiel fortsetzen, wenn es pausiert ist
+            }
+        }
     }
+
+    //Für GameState
+    public int getScore() {
+        return this.score;
+    }
+
+    public int getElapsedTime() {
+        return this.elapsedSeconds;
+    }
+
+    public void resetTimerStart() {
+        this.timerStart = millis();
+    }
+
 
 
 }

@@ -135,7 +135,4 @@ public abstract class Block {
             gameGrid.setPosition(row, col, getId());
         }
     }
-
-
-
 }
