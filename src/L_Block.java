@@ -12,7 +12,6 @@ public class L_Block extends Block{
         return tiles;
     }
 
-
     public int getId() {
         return 7;
     }

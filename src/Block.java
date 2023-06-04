@@ -5,7 +5,7 @@ public abstract class Block {
     protected int[][][] tiles;
     protected int[] currentPosition;
 
-    protected int currentRotation = 0;
+    public int currentRotation = 0;
 
     public Block() {
         tiles = createTiles();
@@ -22,6 +22,11 @@ public abstract class Block {
     public int[][][] getTiles() {
         return tiles;
     }
+
+    public void setTiles(int[][][] newTiles) {
+        tiles = newTiles;
+    }
+
 
     public int[] getCurrentPosition() {
         return currentPosition;
@@ -77,6 +82,21 @@ public abstract class Block {
     }
 
 
+    public boolean rotate(GameGrid gameGrid) {
+        int[][][] newTiles = tiles.clone();
+        int nextRotation = (currentRotation + 1) % newTiles.length;
+
+        int[] newPosition = currentPosition.clone();
+
+        if (canBlockFit(newTiles, newPosition, gameGrid)) {
+            setTiles(newTiles); // Aktualisiere die tiles-Eigenschaft
+            currentRotation = nextRotation;
+            return true; // Rotation erfolgreich
+        }
+
+        return false; // Rotation nicht möglich
+    }
+
 
     private boolean canBlockFit(int[][][] tiles, int[] position, GameGrid gameGrid) {
         for (int i = 0; i < tiles[currentRotation].length; i++) {
@@ -90,7 +110,6 @@ public abstract class Block {
         }
         return true;
     }
-
 
 
     public void freeze(GameGrid gameGrid) {
