@@ -18,12 +18,17 @@ public class Main extends PApplet {
 
     int score = 0;
 
+    int timerStart;
+    int elapsedSeconds;
+
 
 
 
     @Override
     public void settings() {
         size(600, 780);
+
+        timerStart = millis();
 
         currentBlock = blockFactory.getNextBlock();
 
@@ -40,6 +45,10 @@ public class Main extends PApplet {
 
     @Override
     public void draw() {
+
+        // Update elapsedSeconds by subtracting the timer start time from the current time and dividing by 1000 to get seconds.
+        elapsedSeconds = (millis() - timerStart) / 1000;
+
         background(255);
 
         BlockFactory blockFactory = new BlockFactory();
@@ -86,6 +95,10 @@ public class Main extends PApplet {
         textSize(24);
         text("Score: " + score, 40, 300);
 
+        //Zeigt die vergangene Zeit
+        fill(0);
+        textSize(24);
+        text("Timer: " + elapsedSeconds, 40, 350);
       }
 
 
