@@ -48,6 +48,36 @@ public abstract class Block {
         }
     }
 
+    public boolean moveLeft(GameGrid gameGrid) {
+        int[][][] tiles = getTiles();
+        int[] currentPosition = getCurrentPosition();
+
+        int[] newPosition = {currentPosition[0], currentPosition[1] - 1};
+
+        if (canBlockFit(tiles, newPosition, gameGrid)) {
+            currentPosition[1]--;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean moveRight(GameGrid gameGrid) {
+        int[][][] tiles = getTiles();
+        int[] currentPosition = getCurrentPosition();
+
+        int[] newPosition = {currentPosition[0], currentPosition[1] + 1};
+
+        if (canBlockFit(tiles, newPosition, gameGrid)) {
+            currentPosition[1]++;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
 
     private boolean canBlockFit(int[][][] tiles, int[] position, GameGrid gameGrid) {
         for (int i = 0; i < tiles[currentRotation].length; i++) {

@@ -117,9 +117,8 @@ public class GameGrid{
             int col = blockPositions[j][i][1] + startOffset[1];
             setPosition(row, col, blockId);
         }
-
-
     }
+
 
     public void deleteBlock(int[][][] blockPositions, int[] startOffset) {
         for (int i = 0, j=0; i < blockPositions[j].length; i++) {

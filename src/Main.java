@@ -7,14 +7,14 @@ public class Main extends PApplet {
         PApplet.main(Main.class);
     }
 
-    public static final int speed = 2;
-    boolean isRunning = true;
+    public static final int speed = 50;
+
     BlockFactory blockFactory = new BlockFactory();
 
+    InputHandler input = new InputHandler();
 
     GameGrid gridPlayground = new GameGrid(20, 10);
     GameGrid gridNextStone = new GameGrid(4, 4);
-
 
     Block currentBlock;
 
@@ -24,6 +24,8 @@ public class Main extends PApplet {
 
 
         currentBlock = blockFactory.getNextBlock();
+
+
 
         // Alle Zellen mit 0 füllen
         gridPlayground.setupGrid(gridPlayground);
@@ -70,10 +72,12 @@ public class Main extends PApplet {
                 System.out.println(" block: " + currentBlock.getId());
             }
 
+
+        }
             // Zeichnet den Block nach dem Bewegen
             gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.getId());
 
       }
 
-    }
 }
+
