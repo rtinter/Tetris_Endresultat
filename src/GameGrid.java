@@ -1,5 +1,5 @@
 import processing.core.PApplet;
-public class GameGrid{
+public class GameGrid extends Kollision{
 
 
     //Attribute
@@ -8,18 +8,12 @@ public class GameGrid{
     private int cols;
     int cellSize = 35;
 
-
-
-
-
-
     //Konstruktor
     public GameGrid(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
         this.grid = new int[rows][cols];
     }
-
 
     //Getter
     public int getRows() {
@@ -63,75 +57,10 @@ public class GameGrid{
         }
     }
 
-    public boolean isRowFull(int row){
-        for(int i = 0; i < cols;i++){
-            if(grid[row][i] == 0){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean isRowEmpty(int row){
-        for(int i = 0; i < cols; i++){
-            if(grid[row][i] != 0){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private void clearRow(int row){
-        for(int i = 0; i < cols; i++){
-            grid[row][i] = 0;
-        }
-    }
-
-    private void moveRowDown(int row, int howMany){
-        for(int i = 0; i < cols; i++){
-            grid[row + howMany][i] = grid[row][i];
-            grid[row][i] = 0;
-        }
-    }
 
     // Durchläuft das Array und checkt ob Reihe voll ist, sonst ob generell eine Reihe voll war
     // gibt an wieviele Reihen voll sind und füllt sie mit moveRowDown wieder auf
     // gibt die erhalten Punkte je nach reihenanzahl zurück
-
-    public int clearFullRows() {
-        int clearedRows = 0;
-        int points = 0;
-
-        for (int i = rows - 1; i >= 0; i--) {
-            if (isRowFull(i)) {
-                clearRow(i);
-                clearedRows++;
-            } else if (clearedRows > 0) {
-                moveRowDown(i, clearedRows);
-            }
-        }
-
-        switch (clearedRows) {
-            case 1:
-                points = 40;
-                break;
-            case 2:
-                points = 100;
-                break;
-            case 3:
-                points = 300;
-                break;
-            case 4:
-                points = 1200;
-                break;
-            default:
-                break;
-        }
-
-        return points;
-    }
-
-
 
 
     public void drawBlock(int[][][] blockPositions, int[] startOffset, int blockId, int currentRotation) {
@@ -150,8 +79,6 @@ public class GameGrid{
             setPosition(row, col, 0);
         }
     }
-
-
 
 
 

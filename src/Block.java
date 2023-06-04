@@ -1,7 +1,7 @@
 import processing.core.PApplet;
 
 
-public abstract class Block {
+public abstract class Block{
     protected int[][][] tiles;
     protected int[] currentPosition;
 

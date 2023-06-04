@@ -23,7 +23,7 @@ public class Main extends PApplet {
     int timerStart;
     int elapsedSeconds;
 
-
+    Kollision kollision = new Kollision();
 
 
     @Override
@@ -77,7 +77,7 @@ public class Main extends PApplet {
                 // Block konnte nicht nach unten bewegt werden, daher wird er eingefroren
                 currentBlock.freeze(gridPlayground);
 
-                int points = gridPlayground.clearFullRows(); // Punkte zuweisen
+                int points = kollision.clearFullRows(gridPlayground); // Punkte zuweisen
                 score += points; // Punkte erhöhen
 
                 gridNextStone.setupGrid(gridNextStone);
