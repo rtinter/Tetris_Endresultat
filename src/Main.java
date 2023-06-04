@@ -21,7 +21,10 @@ public class Main extends PApplet {
     int score = 0;
 
     int timerStart;
+
     int elapsedSeconds;
+
+    int pauseTime;
 
     GameState gameState;
 

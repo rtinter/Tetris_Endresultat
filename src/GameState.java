@@ -31,12 +31,14 @@ public class GameState {
     public void pauseGame() {
         if(this.state == State.RUNNING) {
             this.state = State.PAUSED;
+            main.pauseTime = main.millis();
         }
     }
 
     public void resumeGame() {
         if(this.state == State.PAUSED) {
             this.state = State.RUNNING;
+            main.timerStart += main.millis() - main.pauseTime;
         }
     }
 
