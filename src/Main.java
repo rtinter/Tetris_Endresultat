@@ -98,7 +98,7 @@ public class Main extends PApplet {
         //Zeigt die vergangene Zeit
         fill(0);
         textSize(24);
-        text("Timer: " + elapsedSeconds, 40, 350);
+        text("Time: " + elapsedSeconds, 40, 350);
       }
 
 
