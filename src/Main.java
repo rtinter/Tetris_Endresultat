@@ -1,6 +1,8 @@
 import processing.core.PApplet;
 import java.util.ArrayList;
 
+
+
 public class Main extends PApplet {
 
     public static void main(String[] args) {
@@ -16,6 +18,9 @@ public class Main extends PApplet {
     GameGrid gridPlayground = new GameGrid(20, 10);
     GameGrid gridNextStone = new GameGrid(4, 4);
 
+    Kollision kollision = new Kollision(gridPlayground.getRows(), gridPlayground.getCols());
+
+
     Block currentBlock;
 
     int score = 0;
@@ -23,7 +28,6 @@ public class Main extends PApplet {
     int timerStart;
     int elapsedSeconds;
 
-    Kollision kollision = new Kollision();
 
 
     @Override
@@ -140,3 +144,4 @@ public class Main extends PApplet {
 
 
 }
+

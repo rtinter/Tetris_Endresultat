@@ -1,5 +1,5 @@
 import processing.core.PApplet;
-public class GameGrid extends Kollision{
+public class GameGrid{
 
 
     //Attribute

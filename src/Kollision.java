@@ -1,4 +1,4 @@
-public class Kollision {
+public class Kollision extends GameGrid{
 
     public int clearFullRows(GameGrid gameGrid) {
         int clearedRows = 0;
@@ -55,22 +55,8 @@ public class Kollision {
         }
     }
 
-    public void drawBlock(GameGrid gameGrid, int[][][] blockPositions, int[] startOffset, int blockId, int currentRotation) {
-        for (int i = 0, j = currentRotation; i < blockPositions[j].length; i++) {
-            int row = blockPositions[j][i][0] + startOffset[0];
-            int col = blockPositions[j][i][1] + startOffset[1];
-            gameGrid.setPosition(row, col, blockId);
-        }
+
+    public Kollision(int rows, int cols) {
+        super(rows, cols);
     }
-
-    public void deleteBlock(GameGrid gameGrid, int[][][] blockPositions, int[] startOffset, int currentRotation) {
-        for (int i = 0, j = currentRotation; i < blockPositions[j].length; i++) {
-            int row = blockPositions[j][i][0] + startOffset[0];
-            int col = blockPositions[j][i][1] + startOffset[1];
-            gameGrid.setPosition(row, col, 0);
-        }
-    }
-
-
-
 }
