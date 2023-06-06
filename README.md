@@ -20,10 +20,12 @@ Das Tetris-Spiel verfügt über folgende Funktionen:
 - Punktezählung und Anzeige des Spielstands
 - Anzeige des nächsten Tetrominos
 - Spielende-Erkennung
+- Start und Pause
 
 Steuerung
 
 - Spiel starten: Enter-Taste
+- Spiel pausieren: Leertaste
 - Tetromino nach links/rechts bewegen: Pfeiltasten links/rechts
 - Tetromino schneller nach unten bewegen: Pfeiltaste runter 
 
