@@ -100,16 +100,29 @@ public abstract class Block{
 
         int[] newPosition = currentPosition.clone();
 
-
-        if (canBlockFit(newTiles, newPosition, gameGrid)) {
-            setTiles(newTiles); // Aktualisiere die tiles-Eigenschaft
-            currentRotation = nextRotation;
-            return true; // Rotation erfolgreich
+        // Überprüfe, ob der gedrehte Block noch innerhalb der Grenzen des Spielfelds liegt
+        if (!isRotationOutOfBounds(newTiles, newPosition, gameGrid, nextRotation)) {
+            if (canBlockFit(newTiles, newPosition, gameGrid)) {
+                setTiles(newTiles); // Aktualisiere die tiles-Eigenschaft
+                currentRotation = nextRotation;
+                return true; // Rotation erfolgreich
+            }
         }
-
         return false; // Rotation nicht möglich
     }
 
+    private boolean isRotationOutOfBounds(int[][][] tiles, int[] position, GameGrid gameGrid, int nextRotation) {
+        for (int i = 0; i < tiles[nextRotation].length; i++) {
+            int row = tiles[nextRotation][i][0] + position[0];
+            int col = tiles[nextRotation][i][1] + position[1];
+
+            // Überprüfen, ob der Block nach der Drehung außerhalb des Spielfelds liegt
+            if (row < 0 || col < 0 || row >= gameGrid.getRows() || col >= gameGrid.getCols()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     private boolean canBlockFit(int[][][] tiles, int[] position, GameGrid gameGrid) {
         for (int i = 0; i < tiles[currentRotation].length; i++) {

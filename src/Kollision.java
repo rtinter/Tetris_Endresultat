@@ -54,8 +54,6 @@ public class Kollision extends GameGrid{
             gameGrid.setPosition(row, i, 0);
         }
     }
-
-
     public Kollision(int rows, int cols) {
         super(rows, cols);
     }

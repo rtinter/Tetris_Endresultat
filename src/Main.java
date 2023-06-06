@@ -1,8 +1,6 @@
 import processing.core.PApplet;
 import java.util.ArrayList;
 
-
-
 public class Main extends PApplet {
 
     public static void main(String[] args) {
@@ -20,8 +18,8 @@ public class Main extends PApplet {
 
     Kollision kollision = new Kollision(gridPlayground.getRows(), gridPlayground.getCols());
 
-
     Block currentBlock;
+    GameState gameState;
 
     int score = 0;
 
@@ -31,7 +29,6 @@ public class Main extends PApplet {
 
     int pauseTime;
 
-    GameState gameState;
 
 
     @Override
@@ -71,8 +68,6 @@ public class Main extends PApplet {
         //
         if (gameState.getState() == GameState.State.RUNNING) {
 
-
-            // Update elapsedSeconds by subtracting the timer start time from the current time and dividing by 1000 to get seconds.
             elapsedSeconds = (millis() - timerStart) / 1000;
 
             background(255);
@@ -180,11 +175,11 @@ public class Main extends PApplet {
         // Tasteneingabe um das Spiel zu starten
         if (key == ENTER) {
             if (gameState.getState() == GameState.State.START) {
-                gameState.startGame(); // Spiel starten, wenn es gestartet wird
+                gameState.startGame();
             }
         }
 
-        //Tasteneingabe zum pausieren des Spiels
+        //Tasteneingabe zum Pausieren des Spiels
         if (key == ' ') { // Wenn die Leertaste gedrückt wird
             if (gameState.getState() == GameState.State.RUNNING) {
                 gameState.pauseGame(); // Spiel pausieren, wenn es läuft

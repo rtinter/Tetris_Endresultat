@@ -1,3 +1,4 @@
+import processing.core.PApplet;
 public class GameState extends Kollision{
 
     public enum State {
