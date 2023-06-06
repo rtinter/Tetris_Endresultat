@@ -5,7 +5,7 @@ Es wurde entwickelt, um die Grundlagen der objektorientierten Programmierung in 
 
 Spielregeln
 
-Das Ziel des Spiels ist es, Reihen mit Tetrominos (Formen aus vier Blöcken) zu füllen, um sie vom Bildschirm zu entfernen.
+Das Ziel des Spiels ist es, Reihen mit Tetrominos (Formen aus je vier Blöcken) zu füllen, um sie vom Bildschirm zu entfernen.
 Die Tetrominos fallen vom oberen Bildschirmrand herunter und können vom Spieler mithilfe der Pfeiltasten nach links und rechts bewegt und gedreht werden.
 Wenn eine horizontale Reihe vollständig mit Tetrominos gefüllt ist, wird sie vom Bildschirm entfernt, und der Spieler erhält Punkte.
 Das Spiel endet, wenn die Tetrominos den oberen Bildschirmrand erreichen.
