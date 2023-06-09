@@ -52,17 +52,9 @@ public class GameGrid{
 
 
     public boolean IsEmpty(int row, int col) {
-        if(grid[row][col] == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return grid[row][col] == 0;
     }
 
-
-    // Durchläuft das Array und checkt ob Reihe voll ist, sonst ob generell eine Reihe voll war
-    // gibt an wieviele Reihen voll sind und füllt sie mit moveRowDown wieder auf
-    // gibt die erhalten Punkte je nach reihenanzahl zurück
 
 
     public void drawBlock(int[][][] blockPositions, int[] startOffset, int blockId, int currentRotation) {
@@ -121,7 +113,7 @@ public class GameGrid{
                     default:
                         a.fill(0, 255, 127); // Grün
                 }
-                a.rect(x + 40, y + 40, cellSize, cellSize); //+40px Versatz
+                a.rect(x + 40, y + 40, cellSize, cellSize); //+40px = Versatz
             }
 
 

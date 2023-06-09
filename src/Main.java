@@ -180,11 +180,11 @@ public class Main extends PApplet {
         }
 
         //Tasteneingabe zum Pausieren des Spiels
-        if (key == ' ') { // Wenn die Leertaste gedrückt wird
+        if (key == ' ') {
             if (gameState.getState() == GameState.State.RUNNING) {
-                gameState.pauseGame(); // Spiel pausieren, wenn es läuft
+                gameState.pauseGame();
             } else if (gameState.getState() == GameState.State.PAUSED) {
-                gameState.resumeGame(); // Spiel fortsetzen, wenn es pausiert ist
+                gameState.resumeGame();
             }
         }
     }

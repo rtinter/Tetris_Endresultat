@@ -3,9 +3,9 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockFactory {
-    private List<Block> blocks;
-    private Random random;
-    private Block currentBlock;
+    private final List<Block> blocks;
+    private final Random random;
+    private final Block currentBlock;
     private Block nextBlock;
 
     public BlockFactory() {

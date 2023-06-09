@@ -15,7 +15,7 @@ public class Z_Block extends Block{
 
 
     public int getId() {
-        return 5;
+        return 4;
     }
 
     public int[] startCoords() {

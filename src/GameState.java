@@ -9,9 +9,9 @@ public class GameState extends Kollision{
     }
 
     private State state;
-    private Main main;
-    private int score;
-    private int elapsedTime;
+    private final Main main;
+    private final int score;
+    private final int elapsedTime;
 
 
 

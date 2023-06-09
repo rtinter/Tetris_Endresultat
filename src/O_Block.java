@@ -20,7 +20,7 @@ public class O_Block extends Block{
     }
 
     public int[] startCoords() {
-        return new int[] {0, 4 };
+        return new int[] {1, 4 };
     }
 
     public void setCoordinates(int[] newCoordinates) {
