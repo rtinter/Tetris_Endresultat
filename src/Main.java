@@ -65,6 +65,20 @@ public class Main extends PApplet {
             text("Press 'Enter' to begin", width / 2, height / 2 + 20);
         }
 
+        if (gameState.getState() == GameState.State.GAME_OVER) {
+            background(255);
+            textSize(60);
+            fill(0);
+            textAlign(CENTER, CENTER);
+            text("GAME OVER", width / 2, height / 2 - 40);
+            textSize(24);
+            text("Score: " + score, width / 2, height / 2 +60);
+            text("Time: " + elapsedSeconds + " seconds", width / 2, height / 2 + 90);
+            textSize(16);
+            text("Press 'R' to restart", width / 2, height / 2 + 120);
+        }
+
+
         //
         if (gameState.getState() == GameState.State.RUNNING) {
 
@@ -106,6 +120,13 @@ public class Main extends PApplet {
 
                     gridNextStone.setupGrid(gridNextStone);
 
+                    // Überprüfen, ob der nächste Block platziert werden kann
+                    if(!nextBlockInQueue.canBlockFit(nextBlockInQueue.getTiles(), nextBlockInQueue.startCoords(), gridPlayground)) {
+                        // Spiel beenden, wenn der nächste Block nicht platziert werden kann
+                        gameState.gameOver();
+                        return;
+                    }
+
                     // Erzeugt einen neuen Block
                     currentBlock = nextBlockInQueue;
 
@@ -114,7 +135,6 @@ public class Main extends PApplet {
                     gridNextStone.drawBlock(nextBlockInQueue.getTiles(), nextBlockInQueue.startCoordsForNextBlock(), nextBlockInQueue.getId(), nextBlockInQueue.currentRotation);
                 }
             }
-
 
             // Zeichnet den Block nach jedem Tick neu
             gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.getId(), currentBlock.currentRotation);
@@ -187,15 +207,36 @@ public class Main extends PApplet {
                 gameState.resumeGame();
             }
         }
+
+        //Tasteneingabe zum Neustarten
+        if (key == 'R' || key == 'r') {
+            if (gameState.getState() == GameState.State.GAME_OVER) {
+                resetGame();
+                gameState.startGame();
+        }
+        }
     }
 
-    //Für GameState
-    public int getScore() {
-        return this.score;
-    }
+    public void resetGame() {
+        gameState = new GameState(this, gridPlayground.getRows(), gridPlayground.getCols());
 
-    public int getElapsedTime() {
-        return this.elapsedSeconds;
+        // Reset the score
+        score = 0;
+
+        // Reset the timer
+        timerStart = millis();
+        elapsedSeconds = 0;
+
+        // Reset the blocks and the grid
+        gridPlayground.setupGrid(gridPlayground);
+        gridNextStone.setupGrid(gridNextStone);
+
+        // Set the new block at the desired position
+        currentBlock.setCoordinates(currentBlock.startCoords());
+
+        // Draw the new blocks
+        gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.getId(), currentBlock.currentRotation);
+        gridNextStone.drawBlock(nextBlockInQueue.getTiles(), nextBlockInQueue.startCoordsForNextBlock(), nextBlockInQueue.getId(), nextBlockInQueue.currentRotation);
     }
 
     public void resetTimerStart() {

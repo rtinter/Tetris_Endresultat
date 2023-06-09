@@ -14,20 +14,12 @@ public class Kollision extends GameGrid{
         }
 
         switch (clearedRows) {
-            case 1:
-                points = 40;
-                break;
-            case 2:
-                points = 100;
-                break;
-            case 3:
-                points = 300;
-                break;
-            case 4:
-                points = 1200;
-                break;
-            default:
-                break;
+            case 1 -> points = 40;
+            case 2 -> points = 100;
+            case 3 -> points = 300;
+            case 4 -> points = 1200;
+            default -> {
+            }
         }
 
         return points;

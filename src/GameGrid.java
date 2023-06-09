@@ -4,7 +4,6 @@ public class GameGrid{
 
     //Attribute
     int[][] grid;
-
     protected int rows;
     protected int cols;
     int cellSize = 35;
@@ -27,8 +26,6 @@ public class GameGrid{
 
 
     //________________________________________________________________________
-
-
 
     //Gibt den Wert des jeweiligen Punkts auf dem Array zurück
     public int getPosition(int row, int col) {
@@ -55,8 +52,6 @@ public class GameGrid{
         return grid[row][col] == 0;
     }
 
-
-
     public void drawBlock(int[][][] blockPositions, int[] startOffset, int blockId, int currentRotation) {
         for (int i = 0, j= currentRotation; i < blockPositions[j].length; i++) {
             int row = blockPositions[j][i][0] + startOffset[0];
@@ -64,8 +59,6 @@ public class GameGrid{
             setPosition(row, col, blockId);
         }
     }
-
-
     public void deleteBlock(int[][][] blockPositions, int[] startOffset,  int currentRotation) {
         for (int i = 0, j=currentRotation; i < blockPositions[j].length; i++) {
             int row = blockPositions[j][i][0] + startOffset[0];

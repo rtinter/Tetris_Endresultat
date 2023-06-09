@@ -47,8 +47,9 @@ public class GameState extends Kollision{
         }
     }
 
-
-
+    public void gameOver() {
+        this.state = State.GAME_OVER;
+    }
 
     public State getState() {
         return this.state;
