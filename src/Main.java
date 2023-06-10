@@ -1,6 +1,8 @@
 import processing.core.PApplet;
-import java.util.ArrayList;
 
+/**
+ * Die Hauptklasse des Tetris-Spiels.
+ */
 public class Main extends PApplet {
 
     public static void main(String[] args) {
@@ -29,8 +31,9 @@ public class Main extends PApplet {
 
     int pauseTime;
 
-
-
+    /**
+     * Konfiguriert die Größe des Anzeigefensters und initialisiert das Spiel.
+     */
     @Override
     public void settings() {
         size(600, 780);
@@ -44,7 +47,7 @@ public class Main extends PApplet {
         // Alle Zellen mit 0 füllen
         gridPlayground.setupGrid(gridPlayground);
 
-        //Block im gridNextStone zeichnen
+        // Block im gridNextStone zeichnen
         gridNextStone.drawBlock(nextBlockInQueue.getTiles(), nextBlockInQueue.startCoordsForNextBlock(), nextBlockInQueue.getId(), nextBlockInQueue.currentRotation);
 
         gameState = new GameState(this, gridPlayground.getRows(), gridPlayground.getCols());
@@ -52,6 +55,9 @@ public class Main extends PApplet {
         gameState.startScreen();
     }
 
+    /**
+     * Wird kontinuierlich aufgerufen, um das Spiel zu aktualisieren und zu zeichnen.
+     */
     @Override
     public void draw() {
 
@@ -72,7 +78,7 @@ public class Main extends PApplet {
             textAlign(CENTER, CENTER);
             text("GAME OVER", width / 2, height / 2 - 40);
             textSize(24);
-            text("Score: " + score, width / 2, height / 2 +60);
+            text("Score: " + score, width / 2, height / 2 + 60);
             text("Time: " + elapsedSeconds + " seconds", width / 2, height / 2 + 90);
             textSize(16);
             text("Press 'R' to restart", width / 2, height / 2 + 120);
@@ -121,7 +127,7 @@ public class Main extends PApplet {
                     gridNextStone.setupGrid(gridNextStone);
 
                     // Überprüfen, ob der nächste Block platziert werden kann
-                    if(!nextBlockInQueue.canBlockFit(nextBlockInQueue.getTiles(), nextBlockInQueue.startCoords(), gridPlayground)) {
+                    if (!nextBlockInQueue.canBlockFit(nextBlockInQueue.getTiles(), nextBlockInQueue.startCoords(), gridPlayground)) {
                         // Spiel beenden, wenn der nächste Block nicht platziert werden kann
                         gameState.gameOver();
                         return;
@@ -162,6 +168,9 @@ public class Main extends PApplet {
 
     }
 
+    /**
+     * Wird aufgerufen, wenn eine Taste gedrückt wird.
+     */
     public void keyPressed() {
         switch (keyCode) {
             case LEFT: // Bewegt den Block nach links, wenn die linke Pfeiltaste gedrückt wird
@@ -213,10 +222,13 @@ public class Main extends PApplet {
             if (gameState.getState() == GameState.State.GAME_OVER) {
                 resetGame();
                 gameState.startGame();
-        }
+            }
         }
     }
 
+    /**
+     * Setzt das Spiel zurück.
+     */
     public void resetGame() {
         gameState = new GameState(this, gridPlayground.getRows(), gridPlayground.getCols());
 
@@ -239,8 +251,10 @@ public class Main extends PApplet {
         gridNextStone.drawBlock(nextBlockInQueue.getTiles(), nextBlockInQueue.startCoordsForNextBlock(), nextBlockInQueue.getId(), nextBlockInQueue.currentRotation);
     }
 
+    /**
+     * Setzt den Timerstart zurück.
+     */
     public void resetTimerStart() {
         this.timerStart = millis();
     }
 }
-

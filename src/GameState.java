@@ -1,4 +1,3 @@
-import processing.core.PApplet;
 public class GameState extends Kollision{
 
     public enum State {
@@ -53,13 +52,5 @@ public class GameState extends Kollision{
 
     public State getState() {
         return this.state;
-    }
-
-    public int getScore() {
-        return this.score;
-    }
-
-    public int getElapsedTime() {
-        return this.elapsedTime;
     }
 }
