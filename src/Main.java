@@ -9,7 +9,8 @@ public class Main extends PApplet {
         PApplet.main(Main.class);
     }
 
-    public static final int speed = 50;
+    static int speed = 50;
+
 
     BlockFactory blockFactory = new BlockFactory();
     Block nextBlockInQueue = blockFactory.blockQueue();
@@ -89,6 +90,7 @@ public class Main extends PApplet {
         if (gameState.getState() == GameState.State.RUNNING) {
 
             elapsedSeconds = (millis() - timerStart) / 1000;
+
 
             background(255);
 
@@ -234,8 +236,9 @@ public class Main extends PApplet {
 
         // Reset the score
         score = 0;
+        speed = 50;
 
-        // Reset the timer
+                // Reset the timer
         timerStart = millis();
         elapsedSeconds = 0;
 

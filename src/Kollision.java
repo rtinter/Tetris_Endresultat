@@ -42,6 +42,15 @@ public class Kollision extends GameGrid {
             }
         }
 
+        if (clearedRows > 0) {
+            if (Main.speed > 4) {
+                Main.speed -= 3;
+            }
+            else{
+                Main.speed = 3;
+            }
+        }
+
         return points;
     }
 

@@ -44,7 +44,7 @@ public class O_Block extends Block {
      * @return Die Startkoordinaten des Blocks.
      */
     public int[] startCoords() {
-        return new int[] { 1, 4 };
+        return new int[] { 0, 4 };
     }
 
     /**
