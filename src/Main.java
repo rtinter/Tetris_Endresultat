@@ -85,8 +85,6 @@ public class Main extends PApplet {
             text("Press 'R' to restart", width / 2, height / 2 + 120);
         }
 
-
-        //
         if (gameState.getState() == GameState.State.RUNNING) {
 
             elapsedSeconds = (millis() - timerStart) / 1000;
@@ -97,14 +95,13 @@ public class Main extends PApplet {
             BlockFactory blockFactory = new BlockFactory();
 
 
-            // gridPlayground zeichnen
             gridPlayground.draw(this);
 
-            // gridNextStone zeichnen
+
             pushMatrix(); //Speichern des aktuellen Matrix-Zustands (sonst verschiebt sich die Score/Timer Anzeige)
             translate(380, 0);
             gridNextStone.draw(this);
-            popMatrix(); //Wiederherstellen des letzen Matrix-Zustands (sonst verschiebt sich die Score/Timer Anzeige)
+            popMatrix(); //Wiederherstellen des letzten Matrix-Zustands (sonst verschiebt sich die Score/Timer Anzeige)
 
 
             if (frameCount % speed == 0) {
@@ -124,7 +121,7 @@ public class Main extends PApplet {
 
 
                     int points = kollision.clearFullRows(gridPlayground); // Punkte zuweisen
-                    score += points; // Punkte erhöhen
+                    score += points;
 
                     gridNextStone.setupGrid(gridNextStone);
 
@@ -160,7 +157,6 @@ public class Main extends PApplet {
 
         // Bei Pausierung: "PAUSE"
         else if (gameState.getState() == GameState.State.PAUSED) {
-            //background(255);
             textSize(60);
             fill(255, 0, 0);
             textAlign(CENTER, CENTER);
@@ -175,32 +171,28 @@ public class Main extends PApplet {
      */
     public void keyPressed() {
         switch (keyCode) {
-            case LEFT: // Bewegt den Block nach links, wenn die linke Pfeiltaste gedrückt wird
+            case LEFT -> { // Bewegt den Block nach links
                 gridPlayground.deleteBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.currentRotation);
                 currentBlock.moveLeft(gridPlayground);
                 gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.getId(), currentBlock.currentRotation);
-                break;
-
-            case RIGHT: // Bewegt den Block nach rechts, wenn die rechte Pfeiltaste gedrückt wird
+            }
+            case RIGHT -> { // Bewegt den Block nach rechts
                 gridPlayground.deleteBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.currentRotation);
                 currentBlock.moveRight(gridPlayground);
                 gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.getId(), currentBlock.currentRotation);
-                break;
-
-            case DOWN: // Bewegt den Block nach unten, wenn die untere Pfeiltaste gedrückt wird
+            }
+            case DOWN -> { // Bewegt den Block nach unten
                 gridPlayground.deleteBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.currentRotation);
                 currentBlock.moveDown(gridPlayground);
                 gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.getId(), currentBlock.currentRotation);
-                break;
-
-            case UP:
+            }
+            case UP -> { //Rotiert den Block um 90 Grad
                 gridPlayground.deleteBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.currentRotation);
                 currentBlock.rotate(gridPlayground);
                 gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.getId(), currentBlock.currentRotation);
-                break;
-
-            default:
-                break;
+            }
+            default -> {
+            }
         }
 
         // Tasteneingabe um das Spiel zu starten
@@ -234,22 +226,22 @@ public class Main extends PApplet {
     public void resetGame() {
         gameState = new GameState(this, gridPlayground.getRows(), gridPlayground.getCols());
 
-        // Reset the score
+        // Zurücksetzen des Scores und der Geschwindigkeit
         score = 0;
         speed = 50;
 
-                // Reset the timer
+        // Zurücksetzen des Timers
         timerStart = millis();
         elapsedSeconds = 0;
 
-        // Reset the blocks and the grid
+        // Zurücksetzen des Grids und der Blöcke
         gridPlayground.setupGrid(gridPlayground);
         gridNextStone.setupGrid(gridNextStone);
 
-        // Set the new block at the desired position
+        // Neuen Block auf gewünschte Position setzen
         currentBlock.setCoordinates(currentBlock.startCoords());
 
-        // Draw the new blocks
+        // Zeichnen des neuen Blocks
         gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.getId(), currentBlock.currentRotation);
         gridNextStone.drawBlock(nextBlockInQueue.getTiles(), nextBlockInQueue.startCoordsForNextBlock(), nextBlockInQueue.getId(), nextBlockInQueue.currentRotation);
     }
