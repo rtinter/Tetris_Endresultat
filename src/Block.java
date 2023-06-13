@@ -3,6 +3,7 @@
  */
 public abstract class Block {
     protected int[][][] tiles; // Die Darstellung des Blocks als Array von Tiles
+
     protected int[] currentPosition; // Die aktuelle Position des Blocks
 
     public int currentRotation = 0; // Die aktuelle Rotation des Blocks
@@ -30,7 +31,7 @@ public abstract class Block {
      *
      * @return Die ID des Blocks.
      */
-    public abstract int getId();
+    protected abstract int getId();
 
     /**
      * Abstrakte Methode zum Festlegen der Startkoordinaten für den Block.
