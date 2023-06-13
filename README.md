@@ -27,6 +27,7 @@ Steuerung
 - Spiel starten: Enter-Taste
 - Spiel pausieren: Leertaste
 - Tetromino nach links/rechts bewegen: Pfeiltasten links/rechts
+- Tetromino rotation Pfeiltaste hoch
 - Tetromino schneller nach unten bewegen: Pfeiltaste runter 
 
 Autoren
