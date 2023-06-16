@@ -4,8 +4,7 @@
  */
 public class J_Block extends Block {
 
-    private final int[][][] tiles = createTiles(); // Die Positionen der Tiles des Blocks
-    public int[] currentPosition; // Die aktuelle Position des Blocks
+    public J_Block(GameGrid grid){ super(grid); }
 
     /**
      * Erstellt die Positionen der Tiles für den J-Block in verschiedenen Rotationen.

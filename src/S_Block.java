@@ -4,7 +4,7 @@
  */
 public class S_Block extends Block {
 
-    private final int[][][] tiles = createTiles();
+    public S_Block(GameGrid grid){ super(grid); }
 
     /**
      * Erstellt die Tile-Konfigurationen für den S-förmigen Block in verschiedenen Rotationen.

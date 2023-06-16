@@ -4,7 +4,7 @@
  */
 public class O_Block extends Block {
 
-    private final int[][][] tiles = createTiles();
+    public O_Block(GameGrid grid){ super(grid); }
 
     /**
      * Erstellt die Tile-Konfigurationen für den O-förmigen Block in verschiedenen Rotationen.
@@ -23,6 +23,7 @@ public class O_Block extends Block {
      * @param gameGrid Das Spielraster, auf dem der Block platziert ist.
      * @return False, da der O-Block nicht rotiert werden kann.
      */
+
     @Override
     public boolean rotate(GameGrid gameGrid) {
         // O-Blöcke dürfen nicht rotieren, daher wird immer "false" zurückgegeben

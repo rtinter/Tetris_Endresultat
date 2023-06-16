@@ -4,7 +4,7 @@
  */
 public class Z_Block extends Block {
 
-    private final int[][][] tiles = createTiles();
+    public Z_Block(GameGrid grid){ super(grid); }
 
     /**
      * Erstellt die Tile-Konfigurationen für den Z-förmigen Block in verschiedenen Rotationen.

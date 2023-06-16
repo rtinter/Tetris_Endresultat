@@ -61,111 +61,42 @@ public class Main extends PApplet {
      */
     @Override
     public void draw() {
+        var factory = BlockFactory.getInstance();
 
-        if (gameState.getState() == GameState.State.START) {
-            background(255);
-            textSize(60);
-            fill(0);
-            textAlign(CENTER, CENTER);
-            text("TETRIS", width / 2, height / 2 - 40);
-            textSize(24);
-            text("Press 'Enter' to begin", width / 2, height / 2 + 20);
-        }
+        var currentBlock = factory.getCurrentBlock();
+        var nextBlockInQueue = factory.blockQueue();
 
-        if (gameState.getState() == GameState.State.GAME_OVER) {
-            background(255);
-            textSize(60);
-            fill(0);
-            textAlign(CENTER, CENTER);
-            text("GAME OVER", width / 2, height / 2 - 40);
-            textSize(24);
-            text("Score: " + score, width / 2, height / 2 + 60);
-            text("Time: " + elapsedSeconds + " seconds", width / 2, height / 2 + 90);
-            textSize(16);
-            text("Press 'R' to restart", width / 2, height / 2 + 120);
-        }
-
-        if (gameState.getState() == GameState.State.RUNNING) {
-
-            elapsedSeconds = (millis() - timerStart) / 1000;
-
-
-            background(255);
-
-            BlockFactory blockFactory = new BlockFactory();
-
-
-            gridPlayground.draw(this);
-
-
-            pushMatrix(); //Speichern des aktuellen Matrix-Zustands (sonst verschiebt sich die Score/Timer Anzeige)
-            translate(380, 0);
-            gridNextStone.draw(this);
-            popMatrix(); //Wiederherstellen des letzten Matrix-Zustands (sonst verschiebt sich die Score/Timer Anzeige)
-
-
-            if (frameCount % speed == 0) {
-
-                // Löscht den aktuellen Block bevor er sich bewegt
-                gridPlayground.deleteBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.currentRotation);
-
-
-                // Bewegt den Block nach unten
-                boolean movedDown = currentBlock.moveDown(gridPlayground);
-
-
-                // Überprüft, ob der Block erfolgreich nach unten bewegt wurde
-                if (!movedDown) {
-                    // Block konnte nicht nach unten bewegt werden, daher wird er eingefroren
-                    currentBlock.freeze(gridPlayground);
-
-
-                    int points = kollision.clearFullRows(gridPlayground); // Punkte zuweisen
-                    score += points;
-
-                    gridNextStone.setupGrid(gridNextStone);
-
-                    // Überprüfen, ob der nächste Block platziert werden kann
-                    if (!nextBlockInQueue.canBlockFit(nextBlockInQueue.getTiles(), nextBlockInQueue.startCoords(), gridPlayground)) {
-                        // Spiel beenden, wenn der nächste Block nicht platziert werden kann
-                        gameState.gameOver();
-                        return;
-                    }
-
-                    // Erzeugt einen neuen Block
-                    currentBlock = nextBlockInQueue;
-
-                    // Den darauffolgenden im nextblockfeld anzeigen lassen
-                    nextBlockInQueue = blockFactory.getNextBlock();
-                    gridNextStone.drawBlock(nextBlockInQueue.getTiles(), nextBlockInQueue.startCoordsForNextBlock(), nextBlockInQueue.getId(), nextBlockInQueue.currentRotation);
-                }
+        switch(gameState.getState()){
+            case START -> {
+                drawScene("TETRIS", "Press 'Enter' to begin", 20);
             }
-
-            // Zeichnet den Block nach jedem Tick neu
-            gridPlayground.drawBlock(currentBlock.getTiles(), currentBlock.getCurrentPosition(), currentBlock.getId(), currentBlock.currentRotation);
-
-            // Zeigt den Punktestand
-            fill(0);
-            textSize(24);
-            text("Score: " + score, 480, 300); //x-Koordinate verändert, da sie nach Spielstart verschoben wurde
-
-            //Zeigt die vergangene Zeit
-            fill(0);
-            textSize(24);
-            text("Time: " + elapsedSeconds, 480, 350); //x-Koordinate verändert, da sie nach Spielstart verschoben wurde
+            case RUNNING -> {
+                drawGameScene(factory, currentBlock, nextBlockInQueue);
+            }
+            case PAUSED -> {
+                drawPauseScene();
+            }
+            case GAME_OVER -> {
+                drawGameOverScene();
+            }
         }
-
-        // Bei Pausierung: "PAUSE"
-        else if (gameState.getState() == GameState.State.PAUSED) {
-            textSize(60);
-            fill(255, 0, 0);
-            textAlign(CENTER, CENTER);
-            text("PAUSE", width / 2, height / 2);
-        }
-
-
     }
 
+    private void drawPauseScene() {
+        textSize(60);
+        fill(255, 0, 0);
+        textAlign(CENTER, CENTER);
+        text("PAUSE", width / 2, height / 2);
+    }
+
+    private void drawGameScene(BlockFactory factory, Block currentBlock, Block nextBlockInQueue) {
+        elapsedSeconds = (millis() - timerStart) / 1000;
+
+        background(255);
+
+        BlockFactory blockFactory = BlockFactory.getInstance();
+
+    }
     /**
      * Wird aufgerufen, wenn eine Taste gedrückt wird.
      */
@@ -235,8 +166,8 @@ public class Main extends PApplet {
         elapsedSeconds = 0;
 
         // Zurücksetzen des Grids und der Blöcke
-        gridPlayground.setupGrid(gridPlayground);
-        gridNextStone.setupGrid(gridNextStone);
+        gridPlayground.setup();
+        gridNextStone.setup();
 
         // Neuen Block auf gewünschte Position setzen
         currentBlock.setCoordinates(currentBlock.startCoords());

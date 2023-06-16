@@ -95,7 +95,14 @@ public class GameGrid {
      * @param blockId        Die ID des Blocks.
      * @param currentRotation Der aktuelle Rotationszustand des Blocks.
      */
-    public void drawBlock(int[][][] blockPositions, int[] startOffset, int blockId, int currentRotation) {
+
+   public void drawBlock(Block block) {
+       int currentRotation = block.currentRotation;
+       var blockPositions = block.getTiles();
+       var startOffset = block.getCurrentPosition();
+
+       int blockId = block.getId();
+
         for (int i = 0, j = currentRotation; i < blockPositions[j].length; i++) {
             int row = blockPositions[j][i][0] + startOffset[0];
             int col = blockPositions[j][i][1] + startOffset[1];
@@ -123,9 +130,8 @@ public class GameGrid {
      *
      * @param a Die PApplet-Instanz.
      */
-    public void draw(PApplet a) {
-
-        // Färbe Block je nach Wert
+    public void draw() {
+        // Färbe Gamegrid je nach Wert
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 int value = grid[row][col];

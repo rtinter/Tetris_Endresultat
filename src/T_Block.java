@@ -4,14 +4,16 @@
  */
 public class T_Block extends Block {
 
-    private final int[][][] tiles = createTiles();
+    public T_Block(GameGrid grid){ super(grid); }
 
     /**
      * Erstellt die Tile-Konfigurationen für den T-förmigen Block in verschiedenen Rotationen.
      *
      * @return Die Tile-Konfigurationen für den Block.
      */
-    protected int[][][] createTiles() {
+
+
+    public int[][][] createTiles() {
         int[][][] tiles = new int[4][4][2]; // 1. Dimension = Rotationstate, 2. Dimension = Position der Tiles im Objekt, 3. Dimension = x- und y-Koordinaten
         tiles[0] = new int[][] { { 0, 1 }, { 1, 0 }, { 1, 1 }, { 1, 2 } };
         tiles[1] = new int[][] { { 0, 1 }, { 1, 1 }, { 1, 2 }, { 2, 1 } };

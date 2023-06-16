@@ -4,7 +4,7 @@
  */
 public class L_Block extends Block {
 
-    private final int[][][] tiles = createTiles();
+    public L_Block(GameGrid grid){ super(grid); }
 
     /**
      * Erstellt die Tile-Konfigurationen für den L-förmigen Block in verschiedenen Rotationen.

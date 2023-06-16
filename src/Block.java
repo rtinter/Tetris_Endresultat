@@ -229,4 +229,21 @@ public abstract class Block {
             gameGrid.setPosition(row, col, getId());
         }
     }
+
+    /**
+     * Zeichnet den Block auf dem Spielraster.
+     *
+     * @param gameGrid Das Spielraster, auf dem der Block gezeichnet werden soll.
+     */
+    public void draw() {
+        int[][][] tiles = getTiles();
+        int[] position = getCurrentPosition();
+        int blockId = getId();
+
+        for (int i = 0; i < tiles[currentRotation].length; i++) {
+            int row = tiles[currentRotation][i][0] + position[0];
+            int col = tiles[currentRotation][i][1] + position[1];
+            _gameGrid.setPosition(row, col, blockId);
+        }
+    }
 }
