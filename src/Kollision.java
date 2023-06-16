@@ -2,7 +2,9 @@
  * Die Klasse Kollision erweitert die GameGrid-Klasse und enthält Methoden zur Kollisionserkennung
  * und zum Löschen vollständiger Reihen im Spielraster.
  */
-public class Kollision extends GameGrid {
+public class Kollision {
+
+     private GameGrid gameGrid;
 
     /**
      * Konstruktor für die Kollisionsklasse.
@@ -11,7 +13,7 @@ public class Kollision extends GameGrid {
      * @param cols Die Anzahl der Spalten im Spielraster.
      */
     public Kollision(int rows, int cols) {
-        super(rows, cols);
+        this.gameGrid = new GameGrid(rows, cols);
     }
 
     /**

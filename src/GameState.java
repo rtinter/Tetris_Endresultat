@@ -2,7 +2,9 @@
  * Die GameState-Klasse repräsentiert den aktuellen Zustand des Spiels.
  * Sie verwaltet die Zustandsübergänge des Spiels und bietet Methoden zur Steuerung des Spielverlaufs.
  */
-public class GameState extends Kollision {
+public class GameState {
+
+    private Kollision kollision;
 
     /**
      * Aufzählungstyp, der die möglichen Zustände des Spiels darstellt.
@@ -27,7 +29,7 @@ public class GameState extends Kollision {
      * @param cols Die Anzahl der Spalten im Spielfeld
      */
     public GameState(Main main, int rows, int cols) {
-        super(rows + 1, cols);
+        this.kollision = new Kollision(rows + 1, cols);
         this.main = main;
         this.state = State.RUNNING;
         this.score = 0;
