@@ -1,8 +1,5 @@
 import processing.core.PApplet;
 
-/**
- * Die Klasse GameGrid repräsentiert das Spielraster im Tetris-Spiel.
- */
 public class GameGrid {
     // Attribute
     int[][] grid;
@@ -13,12 +10,6 @@ public class GameGrid {
 
     private PApplet _applet;
 
-    /**
-     * Konstruktor - Erzeugt ein neues GameGrid-Objekt mit der angegebenen Anzahl von Zeilen und Spalten.
-     *
-     * @param rows Anzahl der Zeilen im Spielraster.
-     * @param cols Anzahl der Spalten im Spielraster.
-     */
     public GameGrid(PApplet applet, int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
@@ -26,49 +17,24 @@ public class GameGrid {
         _applet = applet;
     }
 
-    /**
-     * Gibt die Anzahl der Zeilen im Spielraster zurück.
-     *
-     * @return Anzahl der Zeilen im Spielraster.
-     */
+
     public int getRows() {
         return rows;
     }
 
-    /**
-     * Gibt die Anzahl der Spalten im Spielraster zurück.
-     *
-     * @return Anzahl der Spalten im Spielraster.
-     */
+
     public int getCols() {
         return cols;
     }
 
-    /**
-     * Gibt den Wert an der angegebenen Position im Spielraster zurück.
-     *
-     * @param row Zeilenindex.
-     * @param col Spaltenindex.
-     * @return Wert an der Position (row, col) im Spielraster.
-     */
     public int getPosition(int row, int col) {
         return grid[row][col];
     }
 
-    /**
-     * Setzt den Wert an der angegebenen Position im Spielraster.
-     *
-     * @param row   Zeilenindex.
-     * @param col   Spaltenindex.
-     * @param value Neuer Wert.
-     */
     public void setPosition(int row, int col, int value) {
         grid[row][col] = value;
     }
 
-    /**
-     * Initialisiert das Spielraster, indem alle Werte auf 0 gesetzt werden.
-     */
     public void setup() {
         for (int row = 0; row < getRows(); row++) {
             for (int col = 0; col < getCols(); col++) {
@@ -77,25 +43,11 @@ public class GameGrid {
         }
     }
 
-    /**
-     * Überprüft, ob die angegebene Position im Spielraster leer ist.
-     *
-     * @param row Zeilenindex.
-     * @param col Spaltenindex.
-     * @return True, wenn die Position leer ist, andernfalls False.
-     */
+
     public boolean IsEmpty(int row, int col) {
         return grid[row][col] == 0;
     }
 
-    /**
-     * Zeichnet einen Block auf dem Spielraster mit den angegebenen Positionen und Eigenschaften.
-     *
-     * @param blockPositions Die Positionen des Blocks.
-     * @param startOffset    Der Startversatz des Blocks.
-     * @param blockId        Die ID des Blocks.
-     * @param currentRotation Der aktuelle Rotationszustand des Blocks.
-     */
 
    public void drawBlock(Block block) {
        int currentRotation = block.currentRotation;
@@ -125,13 +77,6 @@ public class GameGrid {
         }
     }
 
-    /**
-     * Löscht einen Block aus dem Spielraster mit den angegebenen Positionen und Eigenschaften.
-     *
-     * @param blockPositions Die Positionen des Blocks.
-     * @param startOffset    Der Startversatz des Blocks.
-     * @param currentRotation Der aktuelle Rotationszustand des Blocks.
-     */
     public void deleteBlock(Block block) {
         int rotation = block.currentRotation;
         int blockPositions[][][] = block.getTiles();
@@ -144,10 +89,6 @@ public class GameGrid {
         }
     }
 
-    /**
-     * Zeichnet das Spielraster auf der gegebenen PApplet-Instanz.
-     *
-     */
     public void draw() {
         // Färbe Gamegrid je nach Wert
         for (int row = 0; row < rows; row++) {

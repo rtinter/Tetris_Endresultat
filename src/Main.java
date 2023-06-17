@@ -1,8 +1,5 @@
 import processing.core.PApplet;
 
-/**
- * Die Hauptklasse des Tetris-Spiels.
- */
 public class Main extends PApplet {
 
     static int speed = 50;
@@ -28,11 +25,6 @@ public class Main extends PApplet {
         PApplet.main(Main.class);
     }
 
-
-
-    /**
-     * Konfiguriert die Größe des Anzeigefensters und initialisiert das Spiel.
-     */
     @Override
     public void settings() {
         size(600, 780);
@@ -61,10 +53,6 @@ public class Main extends PApplet {
 
         gameState.startScreen();
     }
-
-    /**
-     * Wird kontinuierlich aufgerufen, um das Spiel zu aktualisieren und zu zeichnen.
-     */
 
     @Override
     public void draw() {
@@ -177,9 +165,7 @@ public class Main extends PApplet {
         textSize(24);
         text(str, width / 2, height / 2 + x);
     }
-    /**
-     * Wird aufgerufen, wenn eine Taste gedrückt wird.
-     */
+
     public void keyPressed() {
         var currentBlock = BlockFactory.getInstance().getCurrentBlock();
         switch (keyCode) {
@@ -232,9 +218,6 @@ public class Main extends PApplet {
         }
     }
 
-    /**
-     * Setzt das Spiel zurück.
-     */
     public void resetGame() {
         gameState = new GameState(this, gridPlayground.getRows(), gridPlayground.getCols());
 
@@ -262,9 +245,6 @@ public class Main extends PApplet {
         gridNextStone.drawBlock(nextBlockInQueue);
     }
 
-    /**
-     * Setzt den Timerstart zurück.
-     */
     public void resetTimerStart() {
         this.timerStart = millis();
     }
