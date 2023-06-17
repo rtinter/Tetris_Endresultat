@@ -14,6 +14,7 @@ public abstract class Block {
      * Konstruktor für die Block-Klasse.
      * Initialisiert die tiles- und currentPosition-Eigenschaften.
      */
+
     public Block(GameGrid grid) {
         tiles = createTiles();
         currentPosition = startCoords();
@@ -202,20 +203,7 @@ public abstract class Block {
      * @return true, wenn der Block an der Position platziert werden kann, sonst false.
      */
 
-    public boolean canBlockFit() {
-        var tiles = this.getTiles();
-        var position = this.getCurrentPosition();
-        for (int i = 0; i < tiles[currentRotation].length; i++) {
-            int row = tiles[currentRotation][i][0] + position[0];
-            int col = tiles[currentRotation][i][1] + position[1];
 
-            // Kollisionserkennung mit den Seiten des Spielfelds
-            if (row < 0 || col < 0 || row >= _gameGrid.getRows() || col >= _gameGrid.getCols() || !_gameGrid.IsEmpty(row, col)) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     public boolean canBlockFit(int[] position) {
         var tiles = this.getTiles();

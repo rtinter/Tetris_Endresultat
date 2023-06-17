@@ -5,10 +5,6 @@ import processing.core.PApplet;
  */
 public class Main extends PApplet {
 
-    public static void main(String[] args) {
-        PApplet.main(Main.class);
-    }
-
     static int speed = 50;
 
     GameGrid gridPlayground;
@@ -25,6 +21,14 @@ public class Main extends PApplet {
     int elapsedSeconds;
 
     int pauseTime;
+
+
+
+    public static void main(String[] args) {
+        PApplet.main(Main.class);
+    }
+
+
 
     /**
      * Konfiguriert die Größe des Anzeigefensters und initialisiert das Spiel.
@@ -129,7 +133,7 @@ public class Main extends PApplet {
                 gridNextStone.setup();
 
                 // Überprüfen, ob der nächste Block platziert werden kann
-                if (!nextBlockInQueue.canBlockFit()) {
+                if (!nextBlockInQueue.moveDown()) {
                     // Spiel beenden, wenn der nächste Block nicht platziert werden kann
                     gameState.gameOver();
                     return;
