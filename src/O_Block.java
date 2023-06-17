@@ -25,7 +25,7 @@ public class O_Block extends Block {
      */
 
     @Override
-    public boolean rotate(GameGrid gameGrid) {
+    public boolean rotate() {
         // O-Blöcke dürfen nicht rotieren, daher wird immer "false" zurückgegeben
         return false;
     }

@@ -8,13 +8,16 @@ public abstract class Block {
 
     public int currentRotation = 0; // Die aktuelle Rotation des Blocks
 
+    private GameGrid _gameGrid;
+
     /**
      * Konstruktor für die Block-Klasse.
      * Initialisiert die tiles- und currentPosition-Eigenschaften.
      */
-    public Block() {
+    public Block(GameGrid grid) {
         tiles = createTiles();
         currentPosition = startCoords();
+        _gameGrid = grid;
     }
 
     /**
@@ -94,13 +97,12 @@ public abstract class Block {
      * @param gameGrid Das Spielgitter, auf dem der Block platziert ist.
      * @return true, wenn der Block erfolgreich nach unten bewegt wurde, sonst false.
      */
-    public boolean moveDown(GameGrid gameGrid) {
-        int[][][] tiles = getTiles();
+    public boolean moveDown() {
         int[] currentPosition = getCurrentPosition();
 
         int[] newPosition = {currentPosition[0] + 1, currentPosition[1]};
 
-        if (canBlockFit(tiles, newPosition, gameGrid)) {
+        if (canBlockFit(newPosition)) {
             currentPosition[0]++;
             return true;
         } else {
@@ -114,13 +116,12 @@ public abstract class Block {
      * @param gameGrid Das Spielgitter, auf dem der Block platziert ist.
      * @return true, wenn der Block erfolgreich nach links bewegt wurde, sonst false.
      */
-    public boolean moveLeft(GameGrid gameGrid) {
-        int[][][] tiles = getTiles();
+    public boolean moveLeft() {
         int[] currentPosition = getCurrentPosition();
 
         int[] newPosition = {currentPosition[0], currentPosition[1] - 1};
 
-        if (canBlockFit(tiles, newPosition, gameGrid)) {
+        if (canBlockFit(newPosition)) {
             currentPosition[1]--;
             return true;
         } else {
@@ -134,13 +135,12 @@ public abstract class Block {
      * @param gameGrid Das Spielgitter, auf dem der Block platziert ist.
      * @return true, wenn der Block erfolgreich nach rechts bewegt wurde, sonst false.
      */
-    public boolean moveRight(GameGrid gameGrid) {
-        int[][][] tiles = getTiles();
+    public boolean moveRight() {
         int[] currentPosition = getCurrentPosition();
 
         int[] newPosition = {currentPosition[0], currentPosition[1] + 1};
 
-        if (canBlockFit(tiles, newPosition, gameGrid)) {
+        if (canBlockFit(newPosition)) {
             currentPosition[1]++;
             return true;
         } else {
@@ -154,15 +154,15 @@ public abstract class Block {
      * @param gameGrid Das Spielgitter, auf dem der Block platziert ist.
      * @return true, wenn der Block erfolgreich gedreht wurde, sonst false.
      */
-    public boolean rotate(GameGrid gameGrid) {
+    public boolean rotate() {
         int[][][] newTiles = tiles.clone();
         int nextRotation = (currentRotation + 1) % newTiles.length;
 
         int[] newPosition = currentPosition.clone();
 
         // Überprüfe, ob der gedrehte Block noch innerhalb der Grenzen des Spielfelds liegt
-        if (!isRotationOutOfBounds(newTiles, newPosition, gameGrid, nextRotation)) {
-            if (canBlockFit(newTiles, newPosition, gameGrid)) {
+        if (!isRotationOutOfBounds(newTiles, newPosition, _gameGrid, nextRotation)) {
+            if (canBlockFit(newPosition)) {
                 setTiles(newTiles); // Aktualisiere die tiles-Eigenschaft
                 currentRotation = nextRotation;
                 return true; // Rotation erfolgreich
@@ -201,13 +201,30 @@ public abstract class Block {
      * @param gameGrid     Das Spielgitter, auf dem der Block platziert werden soll.
      * @return true, wenn der Block an der Position platziert werden kann, sonst false.
      */
-    public boolean canBlockFit(int[][][] tiles, int[] position, GameGrid gameGrid) {
+
+    public boolean canBlockFit() {
+        var tiles = this.getTiles();
+        var position = this.getCurrentPosition();
         for (int i = 0; i < tiles[currentRotation].length; i++) {
             int row = tiles[currentRotation][i][0] + position[0];
             int col = tiles[currentRotation][i][1] + position[1];
 
             // Kollisionserkennung mit den Seiten des Spielfelds
-            if (row < 0 || col < 0 || row >= gameGrid.getRows() || col >= gameGrid.getCols() || !gameGrid.IsEmpty(row, col)) {
+            if (row < 0 || col < 0 || row >= _gameGrid.getRows() || col >= _gameGrid.getCols() || !_gameGrid.IsEmpty(row, col)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean canBlockFit(int[] position) {
+        var tiles = this.getTiles();
+        for (int i = 0; i < tiles[currentRotation].length; i++) {
+            int row = tiles[currentRotation][i][0] + position[0];
+            int col = tiles[currentRotation][i][1] + position[1];
+
+            // Kollisionserkennung mit den Seiten des Spielfelds
+            if (row < 0 || col < 0 || row >= _gameGrid.getRows() || col >= _gameGrid.getCols() || !_gameGrid.IsEmpty(row, col)) {
                 return false;
             }
         }

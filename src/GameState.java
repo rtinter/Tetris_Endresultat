@@ -29,7 +29,7 @@ public class GameState {
      * @param cols Die Anzahl der Spalten im Spielfeld
      */
     public GameState(Main main, int rows, int cols) {
-        this.kollision = new Kollision(rows + 1, cols);
+        this.kollision = new Kollision(main, rows + 1, cols);
         this.main = main;
         this.state = State.RUNNING;
         this.score = 0;

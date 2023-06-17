@@ -1,3 +1,5 @@
+import processing.core.PApplet;
+
 /**
  * Die Klasse Kollision erweitert die GameGrid-Klasse und enthält Methoden zur Kollisionserkennung
  * und zum Löschen vollständiger Reihen im Spielraster.
@@ -12,8 +14,8 @@ public class Kollision {
      * @param rows Die Anzahl der Zeilen im Spielraster.
      * @param cols Die Anzahl der Spalten im Spielraster.
      */
-    public Kollision(int rows, int cols) {
-        this.gameGrid = new GameGrid(rows, cols);
+    public Kollision(PApplet applet, int rows, int cols) {
+        this.gameGrid = new GameGrid(applet, rows, cols);
     }
 
     /**
