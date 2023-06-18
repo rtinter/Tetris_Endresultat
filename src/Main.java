@@ -63,7 +63,7 @@ public class Main extends PApplet {
 
         switch(gameState.getState()){
             case START -> {
-                drawScene("TETRIS", "Press 'Enter' to begin", 20);
+                drawStartScene("TETRIS", "Press 'Enter' to begin", 20);
             }
             case RUNNING -> {
                 drawGameScene(factory, currentBlock, nextBlockInQueue);
@@ -150,13 +150,13 @@ public class Main extends PApplet {
     }
 
     private void drawGameOverScene() {
-        drawScene("GAME OVER", "Score: " + score, 60);
+        drawStartScene("GAME OVER", "Score: " + score, 60);
         text("Time: " + elapsedSeconds + " seconds", width / 2, height / 2 + 90);
         textSize(16);
         text("Press 'R' to restart", width / 2, height / 2 + 120);
     }
 
-    private void drawScene(String TETRIS, String str, int x) {
+    private void drawStartScene(String TETRIS, String str, int x) {
         background(255);
         textSize(60);
         fill(0);
