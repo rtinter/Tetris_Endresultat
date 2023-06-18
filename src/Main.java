@@ -230,15 +230,17 @@ public class Main extends PApplet {
         elapsedSeconds = 0;
 
         // Zurücksetzen des Grids und der Blöcke
-        gridPlayground.setup();
         gridNextStone.setup();
+        gridPlayground.setup();
+
 
         // Neuen Block auf gewünschte Position setzen
         var factory = BlockFactory.getInstance();
         var currentBlock = factory.getCurrentBlock();
-        var nextBlockInQueue = factory.initNextBlock();
-        factory.setNextBlock(nextBlockInQueue);
         currentBlock.setCoordinates(currentBlock.startCoords());
+        var nextBlockInQueue = factory.initNextBlock();
+        nextBlockInQueue.setCoordinates(nextBlockInQueue.startCoordsForNextBlock());
+        factory.setNextBlock(nextBlockInQueue);
 
         // Zeichnen des neuen Blocks
         gridPlayground.drawBlock(currentBlock);
