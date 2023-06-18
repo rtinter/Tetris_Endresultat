@@ -63,108 +63,20 @@ public class Main extends PApplet {
 
         switch(gameState.getState()){
             case START -> {
-                drawStartScene("TETRIS", "Press 'Enter' to begin", 20);
+                gameState.drawStartScene("TETRIS", "Press 'Enter' to begin", 20);
             }
             case RUNNING -> {
-                drawGameScene(factory, currentBlock, nextBlockInQueue);
+                gameState.drawGameScene(factory, currentBlock, nextBlockInQueue);
             }
             case PAUSED -> {
-                drawPauseScene();
+                gameState.drawPauseScene();
             }
             case GAME_OVER -> {
-                drawGameOverScene();
+                gameState.drawGameOverScene();
             }
         }
     }
 
-    private void drawPauseScene() {
-        textSize(60);
-        fill(255, 0, 0);
-        textAlign(CENTER, CENTER);
-        text("PAUSE", width / 2, height / 2);
-    }
-
-    private void drawGameScene(BlockFactory factory, Block currentBlock, Block nextBlockInQueue) {
-        elapsedSeconds = (millis() - timerStart) / 1000;
-
-        background(255);
-
-        BlockFactory blockFactory = BlockFactory.getInstance();
-
-        gridPlayground.draw();
-
-        pushMatrix(); //Speichern des aktuellen Matrix-Zustands (sonst verschiebt sich die Score/Timer Anzeige)
-        translate(380, 0);
-        gridNextStone.draw();
-        popMatrix(); //Wiederherstellen des letzten Matrix-Zustands (sonst verschiebt sich die Score/Timer Anzeige)
-
-        if (frameCount % speed == 0) {
-
-            // Löscht den aktuellen Block bevor er sich bewegt
-            gridPlayground.deleteBlock(currentBlock);
-
-
-            // Bewegt den Block nach unten
-            boolean movedDown = currentBlock.moveDown();
-
-
-            // Überprüft, ob der Block erfolgreich nach unten bewegt wurde
-            if (!movedDown) {
-                // Block konnte nicht nach unten bewegt werden, daher wird er eingefroren
-                currentBlock.freeze(gridPlayground);
-                factory.setCurrentBlock(nextBlockInQueue);
-
-
-                int points = kollision.clearFullRows(gridPlayground); // Punkte zuweisen
-                score += points;
-
-                gridNextStone.setup();
-
-                // Überprüfen, ob der nächste Block platziert werden kann
-                if (!nextBlockInQueue.moveDown()) {
-                    // Spiel beenden, wenn der nächste Block nicht platziert werden kann
-                    gameState.gameOver();
-                    return;
-                }
-
-                // Den darauffolgenden im nextblockfeld anzeigen lassen
-                var next = blockFactory.initNextBlock();
-                factory.setCurrentBlock(nextBlockInQueue);
-                factory.setNextBlock(next);
-                gridNextStone.drawNextBlock(next);
-            }
-        }
-
-        // Zeichnet den Block nach jedem Tick neu
-        gridPlayground.drawBlock(currentBlock);
-
-        // Zeigt den Punktestand
-        fill(0);
-        textSize(24);
-        text("Score: " + score, 480, 300); //x-Koordinate verändert, da sie nach Spielstart verschoben wurde
-
-        //Zeigt die vergangene Zeit
-        fill(0);
-        textSize(24);
-        text("Time: " + elapsedSeconds, 480, 350); //x-Koordinate verändert, da sie nach Spielstart verschoben wurde
-    }
-
-    private void drawGameOverScene() {
-        drawStartScene("GAME OVER", "Score: " + score, 60);
-        text("Time: " + elapsedSeconds + " seconds", width / 2, height / 2 + 90);
-        textSize(16);
-        text("Press 'R' to restart", width / 2, height / 2 + 120);
-    }
-
-    private void drawStartScene(String TETRIS, String str, int x) {
-        background(255);
-        textSize(60);
-        fill(0);
-        textAlign(CENTER, CENTER);
-        text(TETRIS, width / 2, height / 2 - 40);
-        textSize(24);
-        text(str, width / 2, height / 2 + x);
-    }
 
     public void keyPressed() {
         var currentBlock = BlockFactory.getInstance().getCurrentBlock();
