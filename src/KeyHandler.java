@@ -1,10 +1,26 @@
+/**
+ * Verwaltet Tastatureingaben im Spiel.
+ */
 public class KeyHandler {
+    /**
+     * Die Instanz des Hauptspiels (Main).
+     */
     private final Main main;
 
+    /**
+     * Erstellt einen KeyHandler.
+     *
+     * @param main Die Instanz des Hauptspiels (Main)
+     */
     public KeyHandler(Main main) {
         this.main = main;
     }
 
+    /**
+     * Verarbeitet Tastendruck-Ereignisse.
+     * Handhabt die Bewegung und Rotation des aktuellen Blocks, sowie die Spielsteuerung
+     * wie Start, Pause, Fortsetzen und Neustart des Spiels.
+     */
     public void handleKeyPressed() {
         var currentBlock = BlockFactory.getInstance().getCurrentBlock();
         switch (main.keyCode) {

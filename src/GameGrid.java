@@ -1,15 +1,41 @@
 import processing.core.PApplet;
 
+/**
+ * GameGrid Klasse repräsentiert das Spielfeld des Spiels.
+ */
 public class GameGrid {
-    // Attribute
-    int[][] grid;
 
+    /**
+     * 2D-Gitter, das das Spielfeld darstellt.
+     */
+    protected int[][] grid;
+
+    /**
+     * Anzahl der Reihen im Gitter.
+     */
     protected int rows;
+
+    /**
+     * Anzahl der Spalten im Gitter.
+     */
     protected int cols;
+
+    /**
+     * Größe jeder Zelle im Gitter.
+     */
     int cellSize = 35;
 
+    /**
+     * Processing Applet, das für die grafische Darstellung verwendet wird.
+     */
     private PApplet _applet;
 
+    /**
+     * Konstruktor der GameGrid Klasse.
+     * @param applet Das Processing Applet, das für die grafische Darstellung verwendet wird.
+     * @param rows Anzahl der Reihen im Gitter.
+     * @param cols Anzahl der Spalten im Gitter.
+     */
     public GameGrid(PApplet applet, int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
@@ -17,23 +43,45 @@ public class GameGrid {
         _applet = applet;
     }
 
+    /**
+     * Gibt die Anzahl der Reihen im Gitter zurück.
+     * @return Anzahl der Reihen.
+     */
     public int getRows() {
         return rows;
     }
 
-
+    /**
+     * Gibt die Anzahl der Spalten im Gitter zurück.
+     * @return Anzahl der Spalten.
+     */
     public int getCols() {
         return cols;
     }
 
+    /**
+     * Gibt den Wert an der angegebenen Position im Gitter zurück.
+     * @param row Reihe der Position.
+     * @param col Spalte der Position.
+     * @return Der Wert an der angegebenen Position.
+     */
     public int getPosition(int row, int col) {
         return grid[row][col];
     }
 
+    /**
+     * Setzt den Wert an der angegebenen Position im Gitter.
+     * @param row Reihe der Position.
+     * @param col Spalte der Position.
+     * @param value Der zu setzende Wert.
+     */
     public void setPosition(int row, int col, int value) {
         grid[row][col] = value;
     }
 
+    /**
+     * Initialisiert das Gitter, indem es alle Positionen auf 0 setzt.
+     */
     public void setup() {
         for (int row = 0; row < getRows(); row++) {
             for (int col = 0; col < getCols(); col++) {
@@ -42,16 +90,26 @@ public class GameGrid {
         }
     }
 
+    /**
+     * Überprüft, ob die angegebene Position im Gitter leer ist (Wert 0 hat).
+     * @param row Reihe der Position.
+     * @param col Spalte der Position.
+     * @return True, wenn die Position leer ist, sonst False.
+     */
     public boolean IsEmpty(int row, int col) {
         return grid[row][col] == 0;
     }
 
-   public void drawBlock(Block block) {
-       int currentRotation = block.getCurrentRotation();
-       var blockPositions = block.getTiles();
-       var startOffset = block.getCurrentPosition();
+    /**
+     * Zeichnet den gegebenen Block auf das Gitter.
+     * @param block Der zu zeichnende Block.
+     */
+    public void drawBlock(Block block) {
+        int currentRotation = block.getCurrentRotation();
+        var blockPositions = block.getTiles();
+        var startOffset = block.getCurrentPosition();
 
-       int blockId = block.getId();
+        int blockId = block.getId();
 
         for (int i = 0, j = currentRotation; i < blockPositions[j].length; i++) {
             int row = blockPositions[j][i][0] + startOffset[0];
@@ -60,11 +118,14 @@ public class GameGrid {
         }
     }
 
+    /**
+     * Zeichnet den nächsten Block auf das Gitter.
+     * @param block Der nächste zu zeichnende Block.
+     */
     public void drawNextBlock(Block block) {
         int currentRotation = block.getCurrentRotation();
         var blockPositions = block.getTiles();
         var startCoords = block.startCoordsForNextBlock();
-
         int blockId = block.getId();
 
         for (int i = 0, j = currentRotation; i < blockPositions[j].length; i++) {
@@ -74,6 +135,10 @@ public class GameGrid {
         }
     }
 
+    /**
+     * Löscht den gegebenen Block vom Gitter.
+     * @param block Der zu löschende Block.
+     */
     public void deleteBlock(Block block) {
         int rotation = block.getCurrentRotation();
         int blockPositions[][][] = block.getTiles();
@@ -86,6 +151,9 @@ public class GameGrid {
         }
     }
 
+    /**
+     * Zeichnet das Gitter und färbt jede Zelle je nach ihrem Wert ein.
+     */
     public void draw() {
         // Färbe Gamegrid je nach Wert
         for (int row = 0; row < rows; row++) {

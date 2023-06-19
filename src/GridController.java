@@ -1,13 +1,32 @@
 import processing.core.PApplet;
 
+/**
+ * Verwaltet das GameGrid
+ */
 public class GridController {
 
+    /**
+     * Die Instanz des Spielgitters
+     */
      private GameGrid gameGrid;
 
+    /**
+     * Erstellt einen GridController.
+     *
+     * @param applet Die PApplet Instanz
+     * @param rows Die Anzahl der Zeilen des Spielgitters
+     * @param cols Die Anzahl der Spalten des Spielgitters
+     */
     public GridController(PApplet applet, int rows, int cols) {
         this.gameGrid = new GameGrid(applet, rows, cols);
     }
 
+    /**
+     * Leert volle Zeilen und bewegt andere Zeilen abwärts.
+     *
+     * @param gameGrid Die Instanz des Spielgitters
+     * @return Die Anzahl der Punkte, basierend auf der Anzahl der gelöschten Zeilen
+     */
     public int clearFullRows(GameGrid gameGrid) {
         int clearedRows = 0;
         int points = 0;
@@ -42,6 +61,13 @@ public class GridController {
         return points;
     }
 
+    /**
+     * Überprüft, ob eine Zeile voll ist.
+     *
+     * @param gameGrid Die Instanz des Spielgitters
+     * @param row Der Index der zu überprüfenden Zeile
+     * @return True, wenn die Zeile voll ist, sonst false
+     */
     private boolean isRowFull(GameGrid gameGrid, int row) {
         for (int i = 0; i < gameGrid.getCols(); i++) {
             if (gameGrid.getPosition(row, i) == 0) {
@@ -51,12 +77,25 @@ public class GridController {
         return true;
     }
 
+    /**
+     * Leert eine bestimmte Zeile.
+     *
+     * @param gameGrid Die Instanz des Spielgitters
+     * @param row Der Index der zu leerenden Zeile
+     */
     private void clearRow(GameGrid gameGrid, int row) {
         for (int i = 0; i < gameGrid.getCols(); i++) {
             gameGrid.setPosition(row, i, 0);
         }
     }
 
+    /**
+     * Bewegt eine bestimmte Zeile abwärts.
+     *
+     * @param gameGrid Die Instanz des Spielgitters
+     * @param row Der Index der zu bewegenden Zeile
+     * @param howMany Die Anzahl der Zeilen, um die die Zeile abwärts bewegt werden soll
+     */
     private void moveRowDown(GameGrid gameGrid, int row, int howMany) {
         for (int i = 0; i < gameGrid.getCols(); i++) {
             gameGrid.setPosition(row + howMany, i, gameGrid.getPosition(row, i));
