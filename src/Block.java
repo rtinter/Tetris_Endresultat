@@ -1,14 +1,18 @@
-
+/**
+ * Die abstrakte Block-Klasse repräsentiert einen Spielblock.
+ */
 public abstract class Block {
-    protected int[][][] tiles; // Die Darstellung des Blocks als Array von Tiles
 
-    protected int[] currentPosition; // Die aktuelle Position des Blocks
-
-    private int currentRotation = 0; // Die aktuelle Rotation des Blocks
-
-    private GameGrid _gameGrid;
+    protected int[][][] tiles;  // Darstellung des Blocks als Array von Tiles
+    protected int[] currentPosition;  // Aktuelle Position des Blocks
+    private int currentRotation = 0;  // Aktuelle Rotation des Blocks
+    private GameGrid _gameGrid;  // Spielfeld, auf dem sich der Block befindet
 
 
+    /**
+     * Konstruktor für die Block-Klasse.
+     * @param grid Das Spielfeld, auf dem sich der Block befindet.
+     */
     public Block(GameGrid grid) {
         tiles = createTiles();
         currentPosition = startCoords();
@@ -16,44 +20,84 @@ public abstract class Block {
     }
 
 
+    /**
+     * Abstrakte Methode, die in Unterklassen implementiert werden muss, um die Tiles des Blocks zu erzeugen.
+     */
     protected abstract int[][][] createTiles();
 
 
+    /**
+     * Abstrakte Methode, die in Unterklassen implementiert werden muss, um die ID des Blocks zu erhalten.
+     */
     protected abstract int getId();
 
+
+    /**
+     * Gibt die aktuelle Rotation des Blocks zurück.
+     * @return Die aktuelle Rotation des Blocks.
+     */
     public int getCurrentRotation() {
         return currentRotation;
     }
 
+
+    /**
+     * Abstrakte Methode, die in Unterklassen implementiert werden muss, um die Startkoordinaten des Blocks zu bestimmen.
+     */
     protected abstract int[] startCoords();
 
 
+    /**
+     * Gibt ein dreidimensionales Array zurück, das die Tiles des Blocks repräsentiert.
+     * @return Ein dreidimensionales Array der Tiles.
+     */
     public int[][][] getTiles() {
         return tiles;
     }
 
 
+    /**
+     * Setzt die Tiles des Blocks auf ein neues dreidimensionales Array.
+     * @param newTiles Das neue dreidimensionale Array der Tiles.
+     */
     public void setTiles(int[][][] newTiles) {
         tiles = newTiles;
     }
 
 
+    /**
+     * Gibt die aktuelle Position des Blocks zurück.
+     * @return Ein Array, das die aktuelle Position des Blocks repräsentiert.
+     */
     public int[] getCurrentPosition() {
         return currentPosition;
     }
 
 
+    /**
+     * Setzt die aktuelle Position des Blocks auf die angegebenen Koordinaten.
+     * @param newCoordinates Ein Array, das die neuen Koordinaten repräsentiert.
+     */
     public void setCoordinates(int[] newCoordinates) {
         currentPosition = newCoordinates;
     }
 
 
+    /**
+     * Gibt die Startkoordinaten für den nächsten Block zurück.
+     *
+     * @return Ein Array von zwei Ganzzahlen, das die Startkoordinaten für den nächsten Block repräsentiert.
+     */
     protected int[] startCoordsForNextBlock() {
         int[] coords = {1, 0};
         return coords;
     }
 
 
+    /**
+     * Versucht, den Block nach unten zu bewegen und gibt zurück, ob dies erfolgreich war.
+     * @return true, wenn der Block erfolgreich nach unten bewegt wurde, sonst false.
+     */
     public boolean moveDown() {
         int[] currentPosition = getCurrentPosition();
 
@@ -68,6 +112,10 @@ public abstract class Block {
     }
 
 
+    /**
+     * Versucht den Block nach links zu bewegen und gibt zurück, ob dies erfolgreich war.
+     * @return true, wenn der Block erfolgreich nach links bewegt wurde, sonst false.
+     */
     public boolean moveLeft() {
         int[] currentPosition = getCurrentPosition();
 
@@ -81,6 +129,11 @@ public abstract class Block {
         }
     }
 
+
+    /**
+     * Versucht den Block nach rechts zu bewegen und gibt zurück, ob dies erfolgreich war.
+     * @return true, wenn der Block erfolgreich nach rechts bewegt wurde, sonst false.
+     */
     public boolean moveRight() {
         int[] currentPosition = getCurrentPosition();
 
@@ -95,6 +148,10 @@ public abstract class Block {
     }
 
 
+    /**
+     * Versucht den Block zu drehen und gibt zurück, ob dies erfolgreich war.
+     * @return true, wenn der Block erfolgreich gedreht wurde, sonst false.
+     */
     public boolean rotate() {
         int[][][] newTiles = tiles.clone();
         int nextRotation = (currentRotation + 1) % newTiles.length;
@@ -113,6 +170,15 @@ public abstract class Block {
     }
 
 
+    /**
+     * Überprüft, ob eine bestimmte Rotation des Blocks außerhalb des Spielfelds liegen würde.
+     *
+     * @param tiles Das dreidimensionale Array, das die Tiles des Blocks repräsentiert.
+     * @param position Die Position des Blocks.
+     * @param gameGrid Das Spielfeld.
+     * @param nextRotation Die nächste Rotation des Blocks.
+     * @return true, wenn die Rotation des Blocks außerhalb des Spielfelds liegen würde, sonst false.
+     */
     private boolean isRotationOutOfBounds(int[][][] tiles, int[] position, GameGrid gameGrid, int nextRotation) {
         for (int i = 0; i < tiles[nextRotation].length; i++) {
             int row = tiles[nextRotation][i][0] + position[0];
@@ -127,7 +193,11 @@ public abstract class Block {
     }
 
 
-
+    /**
+     * Überprüft, ob der Block an einer bestimmten Position platziert werden kann.
+     * @param position Die Position, die überprüft werden soll.
+     * @return true, wenn der Block an der Position platziert werden kann, sonst false.
+     */
     public boolean canBlockFit(int[] position) {
         var tiles = this.getTiles();
         for (int i = 0; i < tiles[currentRotation].length; i++) {
@@ -143,6 +213,10 @@ public abstract class Block {
     }
 
 
+    /**
+     * "Friert" den Block ein, d.h., er wird unveränderlich und kann nicht mehr bewegt werden.
+     * @param gameGrid Das Spielfeld, auf dem der Block eingefroren werden soll.
+     */
     public void freeze(GameGrid gameGrid) {
         int[][][] tiles = getTiles();
         int[] position = getCurrentPosition();

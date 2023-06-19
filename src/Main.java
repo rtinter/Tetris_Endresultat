@@ -1,35 +1,43 @@
 import processing.core.PApplet;
 
+/**
+ * Die Hauptklasse des Spiels, welche das Spielfeld, die Blöcke und die Spielsteuerung verwaltet.
+ */
 public class Main extends PApplet {
-
-    static int speed = 50;
 
     GameGrid gridPlayground;
     GameGrid gridNextStone;
-
     GridController gridController;
-
     GameState gameState;
-
     KeyHandler keyHandler;
-
+    static int speed = 50;
     int score = 0;
-
     int timerStart;
-
     int elapsedSeconds;
-
     int pauseTime;
 
+
+    /**
+     * Hauptmethode, die das Spiel startet.
+     *
+     * @param args Kommandozeilenargumente
+     */
     public static void main(String[] args) {
         PApplet.main(Main.class);
     }
 
+    /**
+     * Wird aufgerufen, wenn eine Taste gedrückt wird.
+     * Leitet den Tastendruck an den keyHandler weiter.
+     */
     @Override
     public void keyPressed() {
         keyHandler.handleKeyPressed();
     }
 
+    /**
+     * Konfiguriert die Spieleinstellungen, initialisiert die Spielfelder und das Spiel.
+     */
     @Override
     public void settings() {
         size(600, 780);
@@ -60,6 +68,9 @@ public class Main extends PApplet {
         gameState.startScreen();
     }
 
+    /**
+     * Aktualisiert die Zeichnung auf dem Bildschirm basierend auf dem aktuellen Spielzustand.
+     */
     @Override
     public void draw() {
         var factory = BlockFactory.getInstance();
@@ -83,6 +94,9 @@ public class Main extends PApplet {
         }
     }
 
+    /**
+     * Zeichnet "PAUSE". Wird aufgerufen, wenn das Spiel pausiert ist.
+     */
     private void drawPauseScene() {
         textSize(60);
         fill(255, 0, 0);
@@ -90,6 +104,14 @@ public class Main extends PApplet {
         text("PAUSE", width / 2, height / 2);
     }
 
+    /**
+     * Zeichnet die Spielszene, einschließlich des aktuellen und des nächsten Blocks,
+     * des Spielfelds und des Punktestands. Wird in jeder Spieliteration aufgerufen.
+     *
+     * @param factory Die BlockFactory, die für die Erstellung von Blöcken verwendet wird.
+     * @param currentBlock Der derzeit aktive Block.
+     * @param nextBlockInQueue Der nächste Block, der ins Spiel kommen soll.
+     */
     private void drawGameScene(BlockFactory factory, Block currentBlock, Block nextBlockInQueue) {
         elapsedSeconds = (millis() - timerStart) / 1000;
 
@@ -152,6 +174,9 @@ public class Main extends PApplet {
         text("Time: " + elapsedSeconds, 480, 350); //x-Koordinate verändert, da sie nach Spielstart verschoben wurde
     }
 
+    /**
+     * Zeichnet die Game-Over-Szene mit dem Endpunktestand und einer Aufforderung zum Neustart.
+     */
     private void drawGameOverScene() {
         drawStartScene("GAME OVER", "Score: " + score, 60);
         text("Time: " + elapsedSeconds + " seconds", width / 2, height / 2 + 90);
@@ -159,6 +184,13 @@ public class Main extends PApplet {
         text("Press 'R' to restart", width / 2, height / 2 + 120);
     }
 
+    /**
+     * Zeichnet die Startszene mit einem benutzerdefinierten Titel und Untertitel.
+     *
+     * @param TETRIS Der Titel, der in der Mitte des Bildschirms angezeigt wird.
+     * @param str Der Untertitel, der unter dem Titel angezeigt wird.
+     * @param x Der Abstand des Untertitels vom Titel.
+     */
     private void drawStartScene(String TETRIS, String str, int x) {
         background(255);
         textSize(60);
@@ -169,6 +201,9 @@ public class Main extends PApplet {
         text(str, width / 2, height / 2 + x);
     }
 
+    /**
+     * Setzt das Spiel zurück auf den Anfangszustand.
+     */
     public void resetGame() {
         gameState = new GameState(this, gridPlayground.getRows(), gridPlayground.getCols());
 
@@ -198,6 +233,9 @@ public class Main extends PApplet {
         gridNextStone.drawBlock(nextBlockInQueue);
     }
 
+    /**
+     * Setzt den Startzeitpunkt für den Timer zurück.
+     */
     public void resetTimerStart() {
         this.timerStart = millis();
     }
