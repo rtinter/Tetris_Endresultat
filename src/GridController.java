@@ -5,10 +5,8 @@ import processing.core.PApplet;
  */
 public class GridController {
 
-    /**
-     * Die Instanz des Spielgitters
-     */
-     private GameGrid gameGrid;
+     private GameGrid gameGrid; // Instanz des Spielgitters
+
 
     /**
      * Erstellt einen GridController.
@@ -20,6 +18,7 @@ public class GridController {
     public GridController(PApplet applet, int rows, int cols) {
         this.gameGrid = new GameGrid(applet, rows, cols);
     }
+
 
     /**
      * Leert volle Zeilen und bewegt andere Zeilen abwärts.
@@ -61,6 +60,7 @@ public class GridController {
         return points;
     }
 
+
     /**
      * Überprüft, ob eine Zeile voll ist.
      *
@@ -77,6 +77,7 @@ public class GridController {
         return true;
     }
 
+
     /**
      * Leert eine bestimmte Zeile.
      *
@@ -88,6 +89,7 @@ public class GridController {
             gameGrid.setPosition(row, i, 0);
         }
     }
+
 
     /**
      * Bewegt eine bestimmte Zeile abwärts.

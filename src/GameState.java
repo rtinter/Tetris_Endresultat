@@ -3,10 +3,8 @@
  */
 public class GameState {
 
-    /**
-     * Kontrolliert das Spielfeld.
-     */
-    private GridController gridController;
+    private GridController gridController;  // Kontrolliert das Spielfeld
+
 
     /**
      * Enum, das die möglichen Zustände des Spiels darstellt.
@@ -18,25 +16,15 @@ public class GameState {
         GAME_OVER   // Das Spiel ist vorbei
     }
 
-    /**
-     * Der aktuelle Zustand des Spiels.
-     */
-    private State state;
 
-    /**
-     * Die Main-Instanz, die das Spiel steuert.
-     */
-    private final Main main;
+    private State state;  // Der aktuelle Zustand des Spiels
 
-    /**
-     * Der aktuelle Punktestand des Spiels.
-     */
-    private final int score;
+    private final Main main;  // Main-Instanz, die das Spiel steuert
 
-    /**
-     * Die vergangene Spielzeit in Millisekunden.
-     */
-    private final int elapsedTime;
+    private final int score;  // Aktueller Punktestand
+
+    private final int elapsedTime;  // Vergangene Spielzeit (in ms)
+
 
     /**
      * Konstruktor für die GameState Klasse.
@@ -52,12 +40,14 @@ public class GameState {
         this.elapsedTime = 0;
     }
 
+
     /**
      * Wechselt das Spiel in den Startbildschirm Zustand.
      */
     public void startScreen() {
         this.state = State.START;
     }
+
 
     /**
      * Startet das Spiel.
@@ -67,6 +57,7 @@ public class GameState {
         main.setup();
         main.resetTimerStart();
     }
+
 
     /**
      * Pausiert das Spiel, wenn es gerade läuft.
@@ -78,6 +69,7 @@ public class GameState {
         }
     }
 
+
     /**
      * Setzt das Spiel fort, wenn es pausiert ist.
      */
@@ -88,12 +80,14 @@ public class GameState {
         }
     }
 
+
     /**
      * Beendet das Spiel.
      */
     public void gameOver() {
         this.state = State.GAME_OVER;
     }
+
 
     /**
      * Gibt den aktuellen Zustand des Spiels zurück.

@@ -5,19 +5,17 @@ import processing.core.PApplet;
  */
 public class Main extends PApplet {
 
-    static int speed = 50;
-
-
     GameGrid gridPlayground;
     GameGrid gridNextStone;
     GridController gridController;
     GameState gameState;
     KeyHandler keyHandler;
-
+    static int speed = 50;
     int score = 0;
     int timerStart;
     int elapsedSeconds;
     int pauseTime;
+
 
     /**
      * Hauptmethode, die das Spiel startet.

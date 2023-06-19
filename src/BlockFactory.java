@@ -6,30 +6,16 @@ import java.util.Random;
  */
 public class BlockFactory {
 
-    /**
-     * Singleton Instanz von BlockFactory.
-     */
-    private static BlockFactory _blockFactory;
+    private static BlockFactory _blockFactory;  // Singleton Instanz von BlockFactory
 
-    /**
-     * Zufallsgenerator zur Erzeugung von zufälligen Blocktypen.
-     */
-    private final Random random = new Random();
+    private final Random random = new Random();  // Zufallsgenerator zur Erzeugung von zufälligen Blocktypen
 
-    /**
-     * Der aktuelle Block im Spiel.
-     */
-    private Block currentBlock;
+    private Block currentBlock;  // Der aktuelle Block im Spiel
 
-    /**
-     * Der nächste Block, der ins Spiel kommt.
-     */
-    private Block nextBlock;
+    private Block nextBlock;  // Der nächste Block, der ins Spiel kommt
 
-    /**
-     * Das Spielfeld, auf dem die Blöcke platziert werden.
-     */
-    private GameGrid _gameGrid;
+    private GameGrid _gameGrid;  // Spielfeld, auf dem die Blöcke platziert werden
+
 
     /**
      * Privater Konstruktor, um die Singleton-Instanz zu initialisieren.
@@ -40,6 +26,7 @@ public class BlockFactory {
         currentBlock = getRandomBlock();
         nextBlock = getRandomBlock();
     }
+
 
     /**
      * Initialisiert die BlockFactory Singleton Instanz.
@@ -55,6 +42,7 @@ public class BlockFactory {
         return _blockFactory;
     }
 
+
     /**
      * Liefert die Singleton Instanz von BlockFactory.
      * @return Die Singleton Instanz von BlockFactory.
@@ -66,6 +54,7 @@ public class BlockFactory {
         return _blockFactory;
     }
 
+
     /**
      * Gibt den nächsten Block im Spiel zurück.
      * @return Der nächste Block.
@@ -73,6 +62,7 @@ public class BlockFactory {
     public Block blockQueue() {
         return nextBlock;
     }
+
 
     /**
      * Initialisiert den nächsten Block im Spiel.
@@ -82,6 +72,7 @@ public class BlockFactory {
         return getBlock();
     }
 
+
     /**
      * Gibt den aktuellen Block im Spiel zurück.
      * @return Der aktuelle Block.
@@ -90,6 +81,7 @@ public class BlockFactory {
         return this.currentBlock;
     }
 
+
     /**
      * Setzt den aktuellen Block im Spiel.
      * @param block Der Block, der als aktueller Block gesetzt werden soll.
@@ -97,6 +89,7 @@ public class BlockFactory {
     public void setCurrentBlock(Block block){
         this.currentBlock = block;
     }
+
 
     /**
      * Setzt den nächsten Block im Spiel.

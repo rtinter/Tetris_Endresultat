@@ -3,25 +3,11 @@
  */
 public abstract class Block {
 
-    /**
-     * Repräsentiert die Darstellung des Blocks als Array von Tiles.
-     */
-    protected int[][][] tiles;
+    protected int[][][] tiles;  // Darstellung des Blocks als Array von Tiles
+    protected int[] currentPosition;  // Aktuelle Position des Blocks
+    private int currentRotation = 0;  // Aktuelle Rotation des Blocks
+    private GameGrid _gameGrid;  // Spielfeld, auf dem sich der Block befindet
 
-    /**
-     * Die aktuelle Position des Blocks.
-     */
-    protected int[] currentPosition;
-
-    /**
-     * Die aktuelle Rotation des Blocks.
-     */
-    private int currentRotation = 0;
-
-    /**
-     * Das Spielfeld, auf dem sich der Block befindet.
-     */
-    private GameGrid _gameGrid;
 
     /**
      * Konstruktor für die Block-Klasse.
@@ -33,15 +19,18 @@ public abstract class Block {
         _gameGrid = grid;
     }
 
+
     /**
      * Abstrakte Methode, die in Unterklassen implementiert werden muss, um die Tiles des Blocks zu erzeugen.
      */
     protected abstract int[][][] createTiles();
 
+
     /**
      * Abstrakte Methode, die in Unterklassen implementiert werden muss, um die ID des Blocks zu erhalten.
      */
     protected abstract int getId();
+
 
     /**
      * Gibt die aktuelle Rotation des Blocks zurück.
@@ -51,10 +40,12 @@ public abstract class Block {
         return currentRotation;
     }
 
+
     /**
      * Abstrakte Methode, die in Unterklassen implementiert werden muss, um die Startkoordinaten des Blocks zu bestimmen.
      */
     protected abstract int[] startCoords();
+
 
     /**
      * Gibt ein dreidimensionales Array zurück, das die Tiles des Blocks repräsentiert.
@@ -64,6 +55,7 @@ public abstract class Block {
         return tiles;
     }
 
+
     /**
      * Setzt die Tiles des Blocks auf ein neues dreidimensionales Array.
      * @param newTiles Das neue dreidimensionale Array der Tiles.
@@ -71,6 +63,7 @@ public abstract class Block {
     public void setTiles(int[][][] newTiles) {
         tiles = newTiles;
     }
+
 
     /**
      * Gibt die aktuelle Position des Blocks zurück.
@@ -80,6 +73,7 @@ public abstract class Block {
         return currentPosition;
     }
 
+
     /**
      * Setzt die aktuelle Position des Blocks auf die angegebenen Koordinaten.
      * @param newCoordinates Ein Array, das die neuen Koordinaten repräsentiert.
@@ -87,6 +81,7 @@ public abstract class Block {
     public void setCoordinates(int[] newCoordinates) {
         currentPosition = newCoordinates;
     }
+
 
     /**
      * Gibt die Startkoordinaten für den nächsten Block zurück.
@@ -97,6 +92,7 @@ public abstract class Block {
         int[] coords = {1, 0};
         return coords;
     }
+
 
     /**
      * Versucht, den Block nach unten zu bewegen und gibt zurück, ob dies erfolgreich war.
@@ -115,8 +111,9 @@ public abstract class Block {
         }
     }
 
+
     /**
-     * Versucht, den Block nach links zu bewegen und gibt zurück, ob dies erfolgreich war.
+     * Versucht den Block nach links zu bewegen und gibt zurück, ob dies erfolgreich war.
      * @return true, wenn der Block erfolgreich nach links bewegt wurde, sonst false.
      */
     public boolean moveLeft() {
@@ -132,8 +129,9 @@ public abstract class Block {
         }
     }
 
+
     /**
-     * Versucht, den Block nach rechts zu bewegen und gibt zurück, ob dies erfolgreich war.
+     * Versucht den Block nach rechts zu bewegen und gibt zurück, ob dies erfolgreich war.
      * @return true, wenn der Block erfolgreich nach rechts bewegt wurde, sonst false.
      */
     public boolean moveRight() {
@@ -149,8 +147,9 @@ public abstract class Block {
         }
     }
 
+
     /**
-     * Versucht, den Block zu drehen und gibt zurück, ob dies erfolgreich war.
+     * Versucht den Block zu drehen und gibt zurück, ob dies erfolgreich war.
      * @return true, wenn der Block erfolgreich gedreht wurde, sonst false.
      */
     public boolean rotate() {
@@ -169,6 +168,7 @@ public abstract class Block {
         }
         return false; // Rotation nicht möglich
     }
+
 
     /**
      * Überprüft, ob eine bestimmte Rotation des Blocks außerhalb des Spielfelds liegen würde.
@@ -192,6 +192,7 @@ public abstract class Block {
         return false;
     }
 
+
     /**
      * Überprüft, ob der Block an einer bestimmten Position platziert werden kann.
      * @param position Die Position, die überprüft werden soll.
@@ -210,6 +211,7 @@ public abstract class Block {
         }
         return true;
     }
+
 
     /**
      * "Friert" den Block ein, d.h., er wird unveränderlich und kann nicht mehr bewegt werden.

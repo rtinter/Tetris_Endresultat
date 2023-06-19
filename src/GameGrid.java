@@ -5,30 +5,16 @@ import processing.core.PApplet;
  */
 public class GameGrid {
 
-    /**
-     * 2D-Gitter, das das Spielfeld darstellt.
-     */
-    protected int[][] grid;
+    protected int[][] grid;  // 2D-Gitter, das das Spielfeld darstellt
 
-    /**
-     * Anzahl der Reihen im Gitter.
-     */
-    protected int rows;
+    protected int rows;  // Anzahl der Reihen im Gitter
 
-    /**
-     * Anzahl der Spalten im Gitter.
-     */
-    protected int cols;
+    protected int cols;  // Anzahl der Spalten im Gitter
 
-    /**
-     * Größe jeder Zelle im Gitter.
-     */
-    int cellSize = 35;
+    int cellSize = 35;  // Größe jeder Zelle
 
-    /**
-     * Processing Applet, das für die grafische Darstellung verwendet wird.
-     */
-    private PApplet _applet;
+    private PApplet _applet;  // Processing Applet, das für die grafische Darstellung verwendet wird
+
 
     /**
      * Konstruktor der GameGrid Klasse.
@@ -43,6 +29,7 @@ public class GameGrid {
         _applet = applet;
     }
 
+
     /**
      * Gibt die Anzahl der Reihen im Gitter zurück.
      * @return Anzahl der Reihen.
@@ -51,6 +38,7 @@ public class GameGrid {
         return rows;
     }
 
+
     /**
      * Gibt die Anzahl der Spalten im Gitter zurück.
      * @return Anzahl der Spalten.
@@ -58,6 +46,7 @@ public class GameGrid {
     public int getCols() {
         return cols;
     }
+
 
     /**
      * Gibt den Wert an der angegebenen Position im Gitter zurück.
@@ -69,6 +58,7 @@ public class GameGrid {
         return grid[row][col];
     }
 
+
     /**
      * Setzt den Wert an der angegebenen Position im Gitter.
      * @param row Reihe der Position.
@@ -78,6 +68,7 @@ public class GameGrid {
     public void setPosition(int row, int col, int value) {
         grid[row][col] = value;
     }
+
 
     /**
      * Initialisiert das Gitter, indem es alle Positionen auf 0 setzt.
@@ -90,6 +81,7 @@ public class GameGrid {
         }
     }
 
+
     /**
      * Überprüft, ob die angegebene Position im Gitter leer ist (Wert 0 hat).
      * @param row Reihe der Position.
@@ -99,6 +91,7 @@ public class GameGrid {
     public boolean IsEmpty(int row, int col) {
         return grid[row][col] == 0;
     }
+
 
     /**
      * Zeichnet den gegebenen Block auf das Gitter.
@@ -118,6 +111,7 @@ public class GameGrid {
         }
     }
 
+
     /**
      * Zeichnet den nächsten Block auf das Gitter.
      * @param block Der nächste zu zeichnende Block.
@@ -135,6 +129,7 @@ public class GameGrid {
         }
     }
 
+
     /**
      * Löscht den gegebenen Block vom Gitter.
      * @param block Der zu löschende Block.
@@ -150,6 +145,7 @@ public class GameGrid {
             setPosition(row, col, 0);
         }
     }
+
 
     /**
      * Zeichnet das Gitter und färbt jede Zelle je nach ihrem Wert ein.

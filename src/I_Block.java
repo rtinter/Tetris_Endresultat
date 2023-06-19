@@ -1,19 +1,24 @@
 /**
- * Repräsentiert den I_Block im GameGrid.
+ * Repräsentiert den I_Block.
+ * Diese Klasse erbt von der abstrakten Klasse Block und implementiert dessen abstrakte Methoden.
+ *
+ * Der I_Block hat eine eindeutige Tile-Konfiguration und eine spezifische ID.
  */
 public class I_Block extends Block {
 
     /**
-     * Erstellt einen I_Block.
+     * Konstruktor für I_Block.
+     * Ruft den Konstruktor der übergeordneten Klasse auf.
      *
-     * @param grid Das Spielgitter (GameGrid)
+     * @param grid Das Spielraster, in dem sich der Block bewegt.
      */
     public I_Block(GameGrid grid){ super(grid); }
 
+
     /**
-     * Erstellt die Form für den I_Block.
+     * Erstellt und gibt die spezifische Kachelkonfiguration für I_Block zurück.
      *
-     * @return Ein 3D-Array, das die Formen für den I_Block in verschiedenen Drehpositionen repräsentiert
+     * @return Ein 3D-Array, das die spezifische Kachelkonfiguration für J_Block darstellt.
      */
     protected int[][][] createTiles() {
         int[][][] tiles = new int[4][4][2];
@@ -24,32 +29,36 @@ public class I_Block extends Block {
         return tiles;
     }
 
+
     /**
-     * Gibt die ID des I_Block zurück.
+     * Gibt die eindeutige ID des I_Block zurück.
      *
-     * @return Die ID des I_Block
+     * @return Die eindeutige ID des I_Block
      */
     public int getId() {
         return 1;
     }
 
+
     /**
-     * Gibt die Startkoordinaten für den I_Block zurück.
+     * Gibt die Startkoordinaten des I_Blocks zurück.
      *
-     * @return Ein Array, das die Startkoordinaten für den I_Block enthält
+     * @return Ein Array von zwei Ganzzahlen, das die Startkoordinaten des I_Blocks repräsentiert.
      */
     public int[] startCoords() {
         return new int[]{-1, 3};
     }
 
+
     /**
-     * Setzt die Koordinaten des I_Block auf neue Koordinaten.
+     * Setzt die aktuellen Koordinaten des I_Blocks auf die angegebenen neuen Koordinaten.
      *
-     * @param newCoordinates Ein Array, das die neuen Koordinaten enthält
+     * @param newCoordinates Die neuen Koordinaten, auf die der J_Block gesetzt werden soll.
      */
     public void setCoordinates(int[] newCoordinates) {
         currentPosition = newCoordinates;
     }
+
 
     /**
      * Gibt die Tiles des I_Block zurück.

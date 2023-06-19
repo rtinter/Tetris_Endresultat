@@ -2,10 +2,9 @@
  * Verwaltet Tastatureingaben im Spiel.
  */
 public class KeyHandler {
-    /**
-     * Die Instanz des Hauptspiels (Main).
-     */
-    private final Main main;
+
+    private final Main main;  // Instanz des Hauptspiels
+
 
     /**
      * Erstellt einen KeyHandler.
@@ -15,6 +14,7 @@ public class KeyHandler {
     public KeyHandler(Main main) {
         this.main = main;
     }
+
 
     /**
      * Verarbeitet Tastendruck-Ereignisse.
@@ -55,7 +55,7 @@ public class KeyHandler {
             }
         }
 
-        // Tasteneingabe um das Spiel zu starten
+        // Tasteneingabe zum Starten des Spiels
         if (main.key == Main.ENTER) {
             if (main.gameState.getState() == GameState.State.START) {
                 main.gameState.startGame();
