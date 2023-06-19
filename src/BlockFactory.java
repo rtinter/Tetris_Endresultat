@@ -15,7 +15,6 @@ public class BlockFactory {
 
     private BlockFactory(GameGrid grid) {
         _gameGrid = grid;
-
         currentBlock = getRandomBlock();
         nextBlock = getRandomBlock();
     }

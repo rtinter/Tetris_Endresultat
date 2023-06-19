@@ -21,8 +21,6 @@ public class Main extends PApplet {
 
     int pauseTime;
 
-
-
     public static void main(String[] args) {
         PApplet.main(Main.class);
     }
@@ -111,17 +109,14 @@ public class Main extends PApplet {
             // Löscht den aktuellen Block bevor er sich bewegt
             gridPlayground.deleteBlock(currentBlock);
 
-
             // Bewegt den Block nach unten
             boolean movedDown = currentBlock.moveDown();
-
 
             // Überprüft, ob der Block erfolgreich nach unten bewegt wurde
             if (!movedDown) {
                 // Block konnte nicht nach unten bewegt werden, daher wird er eingefroren
                 currentBlock.freeze(gridPlayground);
                 factory.setCurrentBlock(nextBlockInQueue);
-
 
                 int points = gridController.clearFullRows(gridPlayground); // Punkte zuweisen
                 score += points;
@@ -173,8 +168,6 @@ public class Main extends PApplet {
         textSize(24);
         text(str, width / 2, height / 2 + x);
     }
-
-
 
     public void resetGame() {
         gameState = new GameState(this, gridPlayground.getRows(), gridPlayground.getCols());

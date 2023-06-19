@@ -24,11 +24,9 @@ public class GameState {
         this.elapsedTime = 0;
     }
 
-
     public void startScreen() {
         this.state = State.START;
     }
-
 
     public void startGame() {
         this.state = State.RUNNING;

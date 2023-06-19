@@ -1,6 +1,4 @@
-/**
- * Die abstrakte Klasse Block repräsentiert einen Spielblock im Tetris-Spiel.
- */
+
 public abstract class Block {
     protected int[][][] tiles; // Die Darstellung des Blocks als Array von Tiles
 

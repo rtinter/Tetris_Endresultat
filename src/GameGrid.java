@@ -17,7 +17,6 @@ public class GameGrid {
         _applet = applet;
     }
 
-
     public int getRows() {
         return rows;
     }
@@ -43,11 +42,9 @@ public class GameGrid {
         }
     }
 
-
     public boolean IsEmpty(int row, int col) {
         return grid[row][col] == 0;
     }
-
 
    public void drawBlock(Block block) {
        int currentRotation = block.getCurrentRotation();
