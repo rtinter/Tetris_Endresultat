@@ -1,10 +1,10 @@
 import processing.core.PApplet;
 
-public class Kollision {
+public class GridController {
 
      private GameGrid gameGrid;
 
-    public Kollision(PApplet applet, int rows, int cols) {
+    public GridController(PApplet applet, int rows, int cols) {
         this.gameGrid = new GameGrid(applet, rows, cols);
     }
 

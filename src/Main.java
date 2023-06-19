@@ -7,7 +7,7 @@ public class Main extends PApplet {
     GameGrid gridPlayground;
     GameGrid gridNextStone;
 
-    Kollision kollision;
+    GridController gridController;
 
     GameState gameState;
 
@@ -38,7 +38,7 @@ public class Main extends PApplet {
 
         gridPlayground = new GameGrid(this, 20, 10);
         gridNextStone = new GameGrid(this, 4, 4);
-        kollision = new Kollision(this, gridPlayground.getRows(), gridPlayground.getCols());
+        gridController = new GridController(this, gridPlayground.getRows(), gridPlayground.getCols());
         keyHandler = new KeyHandler(this);
 
         timerStart = millis();

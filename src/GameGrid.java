@@ -50,7 +50,7 @@ public class GameGrid {
 
 
    public void drawBlock(Block block) {
-       int currentRotation = block.currentRotation;
+       int currentRotation = block.getCurrentRotation();
        var blockPositions = block.getTiles();
        var startOffset = block.getCurrentPosition();
 
@@ -64,7 +64,7 @@ public class GameGrid {
     }
 
     public void drawNextBlock(Block block) {
-        int currentRotation = block.currentRotation;
+        int currentRotation = block.getCurrentRotation();
         var blockPositions = block.getTiles();
         var startCoords = block.startCoordsForNextBlock();
 
@@ -78,7 +78,7 @@ public class GameGrid {
     }
 
     public void deleteBlock(Block block) {
-        int rotation = block.currentRotation;
+        int rotation = block.getCurrentRotation();
         int blockPositions[][][] = block.getTiles();
         var pos = block.getCurrentPosition();
 

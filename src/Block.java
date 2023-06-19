@@ -6,7 +6,7 @@ public abstract class Block {
 
     protected int[] currentPosition; // Die aktuelle Position des Blocks
 
-    public int currentRotation = 0; // Die aktuelle Rotation des Blocks
+    private int currentRotation = 0; // Die aktuelle Rotation des Blocks
 
     private GameGrid _gameGrid;
 
@@ -23,6 +23,9 @@ public abstract class Block {
 
     protected abstract int getId();
 
+    public int getCurrentRotation() {
+        return currentRotation;
+    }
 
     protected abstract int[] startCoords();
 

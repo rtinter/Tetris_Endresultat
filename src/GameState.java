@@ -1,6 +1,6 @@
 public class GameState {
 
-    private Kollision kollision;
+    private GridController gridController;
 
 
     public enum State {
@@ -16,7 +16,7 @@ public class GameState {
     private final int elapsedTime;   // Die vergangene Spielzeit in Millisekunden
 
     public GameState(Main main, int rows, int cols) {
-        this.kollision = new Kollision(main, rows + 1, cols);
+        this.gridController = new GridController(main, rows + 1, cols);
         this.main = main;
         this.state = State.RUNNING;
         this.score = 0;
@@ -95,7 +95,7 @@ public class GameState {
                 factory.setCurrentBlock(nextBlockInQueue);
 
 
-                int points = kollision.clearFullRows(main.gridPlayground); // Punkte zuweisen
+                int points = gridController.clearFullRows(main.gridPlayground); // Punkte zuweisen
                 main.score += points;
 
                 main.gridNextStone.setup();
