@@ -11,6 +11,8 @@ public class Main extends PApplet {
 
     GameState gameState;
 
+    KeyHandler keyHandler;
+
     int score = 0;
 
     int timerStart;
@@ -26,12 +28,18 @@ public class Main extends PApplet {
     }
 
     @Override
+    public void keyPressed() {
+        keyHandler.handleKeyPressed();
+    }
+
+    @Override
     public void settings() {
         size(600, 780);
 
         gridPlayground = new GameGrid(this, 20, 10);
         gridNextStone = new GameGrid(this, 4, 4);
         kollision = new Kollision(this, gridPlayground.getRows(), gridPlayground.getCols());
+        keyHandler = new KeyHandler(this);
 
         timerStart = millis();
 
@@ -166,57 +174,6 @@ public class Main extends PApplet {
         text(str, width / 2, height / 2 + x);
     }
 
-    public void keyPressed() {
-        var currentBlock = BlockFactory.getInstance().getCurrentBlock();
-        switch (keyCode) {
-            case LEFT -> { // Bewegt den Block nach links
-                gridPlayground.deleteBlock(currentBlock);
-                currentBlock.moveLeft();
-                gridPlayground.drawBlock(currentBlock);
-            }
-            case RIGHT -> { // Bewegt den Block nach rechts
-                gridPlayground.deleteBlock(currentBlock);
-                currentBlock.moveRight();
-                gridPlayground.drawBlock(currentBlock);
-            }
-            case DOWN -> { // Bewegt den Block nach unten
-                gridPlayground.deleteBlock(currentBlock);
-                currentBlock.moveDown();
-                gridPlayground.drawBlock(currentBlock);
-            }
-            case UP -> { //Rotiert den Block um 90 Grad
-                gridPlayground.deleteBlock(currentBlock);
-                currentBlock.rotate();
-                gridPlayground.drawBlock(currentBlock);
-            }
-            default -> {
-            }
-        }
-
-        // Tasteneingabe um das Spiel zu starten
-        if (key == ENTER) {
-            if (gameState.getState() == GameState.State.START) {
-                gameState.startGame();
-            }
-        }
-
-        //Tasteneingabe zum Pausieren des Spiels
-        if (key == ' ') {
-            if (gameState.getState() == GameState.State.RUNNING) {
-                gameState.pauseGame();
-            } else if (gameState.getState() == GameState.State.PAUSED) {
-                gameState.resumeGame();
-            }
-        }
-
-        //Tasteneingabe zum Neustarten
-        if (key == 'R' || key == 'r') {
-            if (gameState.getState() == GameState.State.GAME_OVER) {
-                resetGame();
-                gameState.startGame();
-            }
-        }
-    }
 
     public void resetGame() {
         gameState = new GameState(this, gridPlayground.getRows(), gridPlayground.getCols());
