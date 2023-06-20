@@ -10,7 +10,7 @@ public class Main extends PApplet {
     GridController gridController;
     GameState gameState;
     KeyHandler keyHandler;
-    static int speed = 50;
+
     int score = 0;
     int timerStart;
     int elapsedSeconds;
@@ -126,7 +126,7 @@ public class Main extends PApplet {
         gridNextStone.draw();
         popMatrix(); //Wiederherstellen des letzten Matrix-Zustands (sonst verschiebt sich die Score/Timer Anzeige)
 
-        if (frameCount % speed == 0) {
+        if (frameCount % GridController.speed == 0) {
 
             // Löscht den aktuellen Block bevor er sich bewegt
             gridPlayground.deleteBlock(currentBlock);
@@ -209,7 +209,7 @@ public class Main extends PApplet {
 
         // Zurücksetzen des Scores und der Geschwindigkeit
         score = 0;
-        speed = 50;
+        GridController.speed = 50;
 
         // Zurücksetzen des Timers
         timerStart = millis();

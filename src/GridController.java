@@ -6,6 +6,7 @@ import processing.core.PApplet;
 public class GridController {
 
      private GameGrid gameGrid; // Instanz des Spielgitters
+     static int speed = 50;
 
 
     /**
@@ -49,11 +50,11 @@ public class GridController {
         }
 
         if (clearedRows > 0) {
-            if (Main.speed > 4) {
-                Main.speed -= 3;
+            if (speed > 4) {
+                speed -= 3;
             }
             else{
-                Main.speed = 3;
+                speed = 3;
             }
         }
 
