@@ -17,9 +17,9 @@ public class T_Block extends Block {
 
 
     /**
-     * Erstellt und gibt die spezifische Kachelkonfiguration für T_Block zurück.
+     * Erstellt und gibt die spezifische Tile-Konfiguration für T_Block zurück.
      *
-     * @return Ein 3D-Array, das die spezifische Kachelkonfiguration für T_Block darstellt.
+     * @return Ein 3D-Array, das die spezifische KTile-Konfiguration für T_Block darstellt.
      */
     protected int[][][] createTiles() {
         int[][][] tiles = new int[4][4][2]; // 1. Dimension = Rotationstate, 2. Dimension = Position der Tiles im Objekt, 3. Dimension = x- und y-Koordinaten

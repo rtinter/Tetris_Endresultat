@@ -21,13 +21,13 @@ public abstract class Block {
 
 
     /**
-     * Abstrakte Methode, die in Unterklassen implementiert werden muss, um die Tiles des Blocks zu erzeugen.
+     * Abstrakte Methode um die Tiles des Blocks zu erzeugen.
      */
     protected abstract int[][][] createTiles();
 
 
     /**
-     * Abstrakte Methode, die in Unterklassen implementiert werden muss, um die ID des Blocks zu erhalten.
+     * Abstrakte Methode um die ID des Blocks zu erhalten.
      */
     protected abstract int getId();
 
@@ -42,7 +42,7 @@ public abstract class Block {
 
 
     /**
-     * Abstrakte Methode, die in Unterklassen implementiert werden muss, um die Startkoordinaten des Blocks zu bestimmen.
+     * Abstrakte Methode um die Startkoordinaten des Blocks zu bestimmen.
      */
 
     protected abstract int[] getStartCoords();
@@ -158,15 +158,14 @@ public abstract class Block {
 
         int[] newPosition = currentPosition.clone();
 
-        // Überprüfe, ob der gedrehte Block noch innerhalb der Grenzen des Spielfelds liegt
         if (!isRotationOutOfBounds(newTiles, newPosition, _gameGrid, nextRotation)) {
             if (canBlockFit(newPosition)) {
-                setTiles(newTiles); // Aktualisiere die tiles-Eigenschaft
+                setTiles(newTiles);
                 currentRotation = nextRotation;
-                return true; // Rotation erfolgreich
+                return true;
             }
         }
-        return false; // Rotation nicht möglich
+        return false;
     }
 
 
@@ -184,7 +183,6 @@ public abstract class Block {
             int row = tiles[nextRotation][i][0] + position[0];
             int col = tiles[nextRotation][i][1] + position[1];
 
-            // Überprüfen, ob der Block nach der Drehung außerhalb des Spielfelds liegt
             if (row < 0 || col < 0 || row >= gameGrid.getRows() || col >= gameGrid.getCols()) {
                 return true;
             }
@@ -214,7 +212,7 @@ public abstract class Block {
 
 
     /**
-     * "Friert" den Block ein, d.h., er wird unveränderlich und kann nicht mehr bewegt werden.
+     * "Friert" den Block ein, wird unveränderlich und kann nicht mehr bewegt werden.
      * @param gameGrid Das Spielfeld, auf dem der Block eingefroren werden soll.
      */
     public void freeze(GameGrid gameGrid) {

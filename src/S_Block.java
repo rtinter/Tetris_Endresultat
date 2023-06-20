@@ -17,12 +17,12 @@ public class S_Block extends Block {
 
 
     /**
-     * Erstellt und gibt die spezifische Kachelkonfiguration für S_Block zurück.
+     * Erstellt und gibt die spezifische Tile-Konfiguration für S_Block zurück.
      *
-     * @return Ein 3D-Array, das die spezifische Kachelkonfiguration für S_Block darstellt.
+     * @return Ein 3D-Array, das die spezifische Tile-Konfiguration für S_Block darstellt.
      */
     protected int[][][] createTiles() {
-        int[][][] tiles = new int[4][4][2]; // 1. Dimension = Rotationstate, 2. Dimension = Position der Tiles im Objekt, 3. Dimension = x- und y-Koordinaten
+        int[][][] tiles = new int[4][4][2]; // 1. Dimension = RotationState, 2. Dimension = Position der Tiles im Objekt, 3. Dimension = x- und y-Koordinaten
         tiles[0] = new int[][] { { 0, 1 }, { 0, 2 }, { 1, 0 }, { 1, 1 } };
         tiles[1] = new int[][] { { 0, 1 }, { 1, 1 }, { 1, 2 }, { 2, 2 } };
         tiles[2] = new int[][] { { 1, 1 }, { 1, 2 }, { 2, 0 }, { 2, 1 } };

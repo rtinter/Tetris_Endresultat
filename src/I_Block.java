@@ -16,9 +16,9 @@ public class I_Block extends Block {
 
 
     /**
-     * Erstellt und gibt die spezifische Kachelkonfiguration für I_Block zurück.
+     * Erstellt und gibt die spezifische Tile-Konfiguration für I_Block zurück.
      *
-     * @return Ein 3D-Array, das die spezifische Kachelkonfiguration für J_Block darstellt.
+     * @return Ein 3D-Array, das die spezifische Tile-Konfiguration für I_Block darstellt.
      */
     protected int[][][] createTiles() {
         int[][][] tiles = new int[4][4][2];
@@ -56,7 +56,7 @@ public class I_Block extends Block {
     /**
      * Setzt die aktuellen Koordinaten des I_Blocks auf die angegebenen neuen Koordinaten.
      *
-     * @param newCoordinates Die neuen Koordinaten, auf die der J_Block gesetzt werden soll.
+     * @param newCoordinates Die neuen Koordinaten, auf die der I_Block gesetzt werden soll.
      */
     public void setCoordinates(int[] newCoordinates) {
         currentPosition = newCoordinates;

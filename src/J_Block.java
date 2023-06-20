@@ -17,9 +17,9 @@ public class J_Block extends Block {
 
 
     /**
-     * Erstellt und gibt die spezifische Kachelkonfiguration für J_Block zurück.
+     * Erstellt und gibt die spezifische Tile-Konfiguration für J_Block zurück.
      *
-     * @return Ein 3D-Array, das die spezifische Kachelkonfiguration für J_Block darstellt.
+     * @return Ein 3D-Array, das die spezifische Tile-Konfiguration für J_Block darstellt.
      */
     protected int[][][] createTiles() {
         int[][][] tiles = new int[4][4][2];

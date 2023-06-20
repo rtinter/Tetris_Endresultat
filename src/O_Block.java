@@ -2,7 +2,7 @@
  * Repräsentiert den O_Block.
  * Diese Klasse erbt von der abstrakten Klasse Block und implementiert dessen abstrakte Methoden.
  *
- * Der O_Block hat eine eindeutige Kachelkonfiguration und eine spezifische ID.
+ * Der O_Block hat eine eindeutige Tile-Konfiguration und eine spezifische ID.
  * Im Gegensatz zu anderen Blöcken kann der O_Block nicht rotiert werden.
  */
 public class O_Block extends Block {
@@ -18,9 +18,9 @@ public class O_Block extends Block {
 
 
     /**
-     * Erstellt und gibt die spezifische Kachelkonfiguration für O_Block zurück.
+     * Erstellt und gibt die spezifische Tile-Konfiguration für O_Block zurück.
      *
-     * @return Ein 3D-Array, das die spezifische Kachelkonfiguration für O_Block darstellt.
+     * @return Ein 3D-Array, das die spezifische Tile-Konfiguration für O_Block darstellt.
      */
     protected int[][][] createTiles() {
         int[][][] tiles = new int[4][4][2]; // 1. Dimension = Rotationstate, 2. Dimension = Position der Tiles im Objekt, 3. Dimension = x- und y-Koordinaten

@@ -83,7 +83,7 @@ public class GameGrid {
 
 
     /**
-     * Überprüft, ob die angegebene Position im Gitter leer ist (Wert 0 hat).
+     * Überprüft, ob die angegebene Position im Gitter leer ist (Wert 0).
      * @param row Reihe der Position.
      * @param col Spalte der Position.
      * @return True, wenn die Position leer ist, sonst False.
@@ -151,7 +151,7 @@ public class GameGrid {
      * Zeichnet das Gitter und färbt jede Zelle je nach ihrem Wert ein.
      */
     public void draw() {
-        // Färbe Gamegrid je nach Wert
+        // Färbt Spielfeld je nach Wert
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 int value = grid[row][col];

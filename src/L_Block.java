@@ -17,9 +17,9 @@ public class L_Block extends Block {
 
 
     /**
-     * Erstellt und gibt die spezifische Kachelkonfiguration für L_Block zurück.
+     * Erstellt und gibt die spezifische Tile-Konfiguration für L_Block zurück.
      *
-     * @return Ein 3D-Array, das die spezifische Kachelkonfiguration für L_Block darstellt.
+     * @return Ein 3D-Array, das die spezifische Tile-Konfiguration für L_Block darstellt.
      */
     protected int[][][] createTiles() {
         int[][][] tiles = new int[4][4][2]; // 1. Dimension = Rotationstate, 2. Dimension = Position der Tiles im Objekt, 3. Dimension = x- und y-Koordinaten
@@ -32,9 +32,9 @@ public class L_Block extends Block {
 
 
     /**
-     * Gibt die eindeutige ID des J_Blocks zurück.
+     * Gibt die eindeutige ID des L_Blocks zurück.
      *
-     * @return Die eindeutige ID des J_Blocks.
+     * @return Die eindeutige ID des L_Blocks.
      */
     public int getId() {
         return 7;
