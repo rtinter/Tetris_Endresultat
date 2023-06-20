@@ -46,10 +46,13 @@ public class Z_Block extends Block {
      *
      * @return Ein Array von zwei Ganzzahlen, das die Startkoordinaten des Z_Blocks repräsentiert.
      */
-    public int[] startCoords() {
+    private int[] startCoords() {
         return new int[] { 0, 5 };
     }
 
+    public int[] getStartCoords(){
+        return startCoords();
+    }
 
     /**
      * Setzt die aktuellen Koordinaten des Z_Blocks auf die angegebenen neuen Koordinaten.
@@ -59,6 +62,8 @@ public class Z_Block extends Block {
     public void setCoordinates(int[] newCoordinates) {
         currentPosition = newCoordinates;
     }
+
+
 
 
     /**

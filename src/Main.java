@@ -223,7 +223,7 @@ public class Main extends PApplet {
         // Neuen Block auf gewünschte Position setzen
         var factory = BlockFactory.getInstance();
         var currentBlock = factory.getCurrentBlock();
-        currentBlock.setCoordinates(currentBlock.startCoords());
+        currentBlock.setCoordinates(currentBlock.getStartCoords());
         var nextBlockInQueue = factory.initNextBlock();
         nextBlockInQueue.setCoordinates(nextBlockInQueue.startCoordsForNextBlock());
         factory.setNextBlock(nextBlockInQueue);

@@ -45,10 +45,13 @@ public class I_Block extends Block {
      *
      * @return Ein Array von zwei Ganzzahlen, das die Startkoordinaten des I_Blocks repräsentiert.
      */
-    public int[] startCoords() {
+    private int[] startCoords() {
         return new int[]{-1, 3};
     }
 
+    public int[] getStartCoords(){
+        return startCoords();
+    }
 
     /**
      * Setzt die aktuellen Koordinaten des I_Blocks auf die angegebenen neuen Koordinaten.

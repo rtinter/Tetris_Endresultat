@@ -56,10 +56,13 @@ public class O_Block extends Block {
      *
      * @return Ein Array von zwei Ganzzahlen, das die Startkoordinaten des O_Blocks repräsentiert.
      */
-    public int[] startCoords() {
+    private int[] startCoords() {
         return new int[] { 0, 4 };
     }
 
+    public int[] getStartCoords(){
+        return startCoords();
+    }
 
     /**
      * Setzt die aktuellen Koordinaten des O_Blocks auf die angegebenen neuen Koordinaten.

@@ -21,7 +21,7 @@ public class T_Block extends Block {
      *
      * @return Ein 3D-Array, das die spezifische Kachelkonfiguration für T_Block darstellt.
      */
-    public int[][][] createTiles() {
+    protected int[][][] createTiles() {
         int[][][] tiles = new int[4][4][2]; // 1. Dimension = Rotationstate, 2. Dimension = Position der Tiles im Objekt, 3. Dimension = x- und y-Koordinaten
         tiles[0] = new int[][] { { 0, 1 }, { 1, 0 }, { 1, 1 }, { 1, 2 } };
         tiles[1] = new int[][] { { 0, 1 }, { 1, 1 }, { 1, 2 }, { 2, 1 } };
@@ -46,10 +46,13 @@ public class T_Block extends Block {
      *
      * @return Ein Array von zwei Ganzzahlen, das die Startkoordinaten des T_Blocks repräsentiert.
      */
-    public int[] startCoords() {
+    private int[] startCoords() {
         return new int[] { 0, 5 };
     }
 
+    public int[] getStartCoords(){
+        return startCoords();
+    }
 
     /**
      * Setzt die aktuellen Koordinaten des T_Blocks auf die angegebenen neuen Koordinaten.

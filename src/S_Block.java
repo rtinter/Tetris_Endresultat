@@ -46,10 +46,13 @@ public class S_Block extends Block {
      *
      * @return Ein Array von zwei Ganzzahlen, das die Startkoordinaten des S_Blocks repräsentiert.
      */
-    public int[] startCoords() {
+    private int[] startCoords() {
         return new int[] { 0, 5 };
     }
 
+    public int[] getStartCoords(){
+        return startCoords();
+    }
 
     /**
      * Setzt die aktuellen Koordinaten des S_Blocks auf die angegebenen neuen Koordinaten.

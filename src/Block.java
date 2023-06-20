@@ -15,7 +15,7 @@ public abstract class Block {
      */
     public Block(GameGrid grid) {
         tiles = createTiles();
-        currentPosition = startCoords();
+        currentPosition = getStartCoords();
         _gameGrid = grid;
     }
 
@@ -44,8 +44,8 @@ public abstract class Block {
     /**
      * Abstrakte Methode, die in Unterklassen implementiert werden muss, um die Startkoordinaten des Blocks zu bestimmen.
      */
-    protected abstract int[] startCoords();
 
+    protected abstract int[] getStartCoords();
 
     /**
      * Gibt ein dreidimensionales Array zurück, das die Tiles des Blocks repräsentiert.
